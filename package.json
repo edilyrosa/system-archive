@@ -1,0 +1,55 @@
+{
+  "name": "system-archive",
+  "version": "1.0.0",
+  "description": "Esta es una App para llevar el registro de un sistema de archivos",
+  "main": "back/main.js",
+  "scripts": {
+    "start": "electron --max-old-space-size=4096 .",
+    "build": "electron-builder",
+    "test": "echo \"Error: no test especificado\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Edily Mora",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^32.1.1",
+    "electron-builder": "^25.0.5"
+  },
+  "dependencies": {
+    "rcedit": "^4.0.1",
+    "sqlite3": "^5.1.7"
+  },
+  "build": {
+    "appId": "com.tuempresa.pocarchive",
+    "productName": "poc-archivedos",
+    "copyright": "Copyright © 2024 Edily Mora",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*"
+    ],
+    "mac": {
+      "target": "dmg"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "public/concejo.ico"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage"
+        }
+      ]
+    },
+    "asar": false
+  }
+}

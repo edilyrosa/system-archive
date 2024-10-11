@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Matrimonios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+
+  
+        <div class="center-image">
+            <img src="../concejo.ico" alt="concejo" width="100" height="100">
+        </div>
+        <h1>Concejo Municipal de Maracaibo</h1>
+        <h2>Bienvenido al Sistema de Archivos de Matrimonios</h2>
+
+        <!-- <div class="center-image">
+            <img src="./cementerio.gif" alt="cementerio" width="300" height="300">
+        </div> -->
+
+        <!-- Formulario de entrada -->
+        <form id="formulario">
+            <div class="form-row">
+                <label for="libro">Libro:</label>
+                <input type="text" id="libro" placeholder="Ingresa el libro" required>
+
+                <label for="tomo">Tomo:</label>
+                <input type="text" id="tomo" placeholder="Ingresa el tomo" required>
+            </div>
+
+            <div class="form-row">
+                <label for="novio">Novio:</label>
+                <input type="text" id="novio" placeholder="Ingresa el nombre del novio" required>
+
+                <label for="novia">Novia:</label>
+                <input type="text" id="novia" placeholder="Ingresa el nombre de la novia" required>
+            </div>
+
+            <div class="form-row">
+                <label for="expediente">Expediente:</label>
+                <input type="text" id="expediente" placeholder="Ingresa el expediente" required>
+
+                <label for="folio">Folio:</label>
+                <input type="text" id="folio" placeholder="Ingresa el folio" required>
+            </div>
+
+            <div class="form-row">
+                <label for="anio">Año:</label>
+                <input type="text" id="anio" placeholder="Ingresa el año" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" placeholder="Ingresa el apellido" required>
+
+                <label for="fecha">Fecha:</label>
+                <input type="text" id="fecha" required>
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+
+
+    <!-- Botones para mostrar data y filtrar -->
+    <div>
+        <button id="mostrar-data">Mostrar data</button>
+        <button id="aplicar-filtros">Filtrar</button>
+    </div>
+
+    <!-- Campos de filtro -->
+    <div>
+        <input type="text" id="filter-libro" placeholder="Libro">
+        <input type="text" id="filter-tomo" placeholder="Tomo">
+        <input type="text" id="filter-novio" placeholder="Novio">
+        <input type="text" id="filter-novia" placeholder="Novia">
+        <input type="text" id="filter-expediente" placeholder="Expediente">
+        <input type="text" id="filter-folio" placeholder="Folio">
+        <input type="text" id="filter-anio" placeholder="Año">
+        <input type="text" id="filter-apellido" placeholder="Apellido">
+        <input type="text" id="filter-fecha" placeholder="Fecha">
+    </div>
+
+    <!-- Tabla de registros -->
+    <table>
+        <thead>
+            <tr>
+                    <th>ID</th>
+                    <th>Consecutivo</th>
+                    <th>Expediente</th>
+                    <th>Esposo</th>
+                    <th>Esposa</th>
+                    <th>Tomo</th>
+                    <th>Folio</th>
+                    <th>Año</th>
+                    <th>Operador</th>
+                    <th>Fecha de Registro</th>
+                    <th>Acciones</th>
+                </tr>
+        </thead>
+        <tbody id="usuarios-body">
+            <!-- Contenido dinámico -->
+        </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <div>
+        <button id="prev-page" onclick="changePage('prev')">Anterior</button>
+        <span id="page-number">Página 1</span>
+        <button id="next-page" onclick="changePage('next')">Siguiente</button>
+    </div>
+</div>
+<script src="../back/renderer.js"></script>
+<script src="../back/filter.js"></script>
+</body>
+</html> 

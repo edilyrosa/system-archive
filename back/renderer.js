@@ -7,7 +7,6 @@ let filters = null;
 function actualizarTabla(rows, offset) {
     const tbody = document.getElementById('usuarios-body');
     const table = document.getElementById('usuarios-table');
-    const pagation = document.getElementById('pagination');
     const noDataMessage = document.getElementById('no-data-message');
 
     if (rows.length === 0) {
@@ -45,6 +44,7 @@ function actualizarTabla(rows, offset) {
 
 ipcRenderer.on('actualizar-registros', (event, rows, offset) => {
     actualizarTabla(rows, offset);
+    actualizarVisibilidadPaginacion(); // Mover esta línea aquí para asegurar que se llame después de actualizar la tabla
 });
 
 function changePage(direction) {
@@ -58,9 +58,18 @@ function changePage(direction) {
 }
 
 function mostrarData() {
-    filters = null;
+   filters = null;
     currentPage = 0;
     ipcRenderer.send('cargar-pagina', currentPage, filters);
+
+    // Mostrar la tabla y la paginación
+    const tableContainer = document.querySelector('.table-container');
+    const pagination = document.querySelector('.pagination');
+    tableContainer.style.display = 'block'; // Asegurarse de que la tabla sea visible
+    pagination.style.display = 'flex'; // Asegurarse de que la paginación sea visible
+
+    // Actualizar la visibilidad de la paginación
+    actualizarVisibilidadPaginacion();
 }
 
 function aplicarFiltros() {
@@ -90,7 +99,7 @@ function aplicarFiltros() {
     const tableContainer = document.querySelector('.table-container');
     const pagination = document.querySelector('.pagination');
     tableContainer.style.display = 'block'; // Asegurarse de que la tabla sea visible
-    pagination.style.display = 'block'; // Asegurarse de que la paginación sea visible
+    pagination.style.display = 'flex'; // Asegurarse de que la paginación sea visible
 
     // Actualizar la visibilidad de la paginación
     actualizarVisibilidadPaginacion();
@@ -162,9 +171,13 @@ function actualizarVisibilidadPaginacion() {
     const tableBody = document.getElementById('usuarios-body');
     const pagination = document.querySelector('.pagination');
 
-    // Verificar si hay registros en la tabla
-    if (tableBody.children.length > 0) {
-        pagination.style.display = 'block'; // Mostrar paginación
+    // Capturar el número de filas en la tabla
+    const rowCount = tableBody.getElementsByTagName('tr').length;
+    console.log('Número de filas en la tabla:', rowCount);
+
+    // Aplicar lógica de paginación
+    if (rowCount >= 1000) {
+        pagination.style.display = 'flex'; // Mostrar paginación
     } else {
         pagination.style.display = 'none'; // Ocultar paginación
     }
@@ -230,7 +243,21 @@ function limpiaFiltro() {
 }
 
 
+// Nueva función para alternar la visibilidad del formulario
+function toggleForm() {
+    const formSection = document.getElementById('form-section');
+    const toggleButton = document.getElementById('toggle-form'); // Obtener el botón
 
+    if (formSection.style.display === 'none') {
+        formSection.style.display = 'block'; // Muestra el formulario
+        toggleButton.innerText = 'Descartar Nueva Insercion de Registro'; // Cambiar el texto del botón
+    } else {
+        formSection.style.display = 'none'; // Oculta el formulario
+        toggleButton.innerText = 'Insertar Registro'; // Cambiar el texto del botón
+    }
+}
+// Conectar la función al botón
+document.getElementById('toggle-form').addEventListener('click', toggleForm);
 
 
 // Agregar console.log para depuración

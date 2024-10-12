@@ -9,7 +9,8 @@ body {
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    width: 98%;
+    margin: 5px auto;
     padding: 20px;
 }
 
@@ -33,16 +34,26 @@ header {
 }
 
 h1 {
-    color: #1a73e8;
-    margin: 0;
+    color: #0c356b;
+    margin: 20px auto;
     font-size: 24px;
+    font-size: 35px;
+    font-weight: 800;
 }
 
 h2 {
-    color: #5f6368;
-    margin: 10px 0 0;
-    font-size: 18px;
+    color: #0f55b0;
+    margin: 20px auto;
+    font-size: 25px;
+    font-weight: 800;
+    text-align: center;
+}
+h3 {
+    color: #192637;
+    margin: 20px auto;
+    font-size: 20px;
     font-weight: 400;
+    text-align: center;
 }
 
 /* Secciones principales */
@@ -68,7 +79,7 @@ h3 {
 label {
     display: block;
     margin-bottom: 5px;
-    color: #5f6368;
+    color: #1a73e8;
     font-weight: 500;
 }
 
@@ -97,11 +108,28 @@ input[type="date"]:focus {
     font-size: 14px;
     font-weight: 500;
     transition: background-color 0.3s;
+    color: #192637;
+}
+
+.container-bt{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto;
 }
 
 .btn-primary {
     background-color: #1a73e8;
+    font-size: 20px;
+    font-weight: 800;
     color: white;
+    width: 50%;
+    text-align: center;
+    margin: 10px auto;
+    padding: 10px;
+    justify-content: center;
+    display: flex;
 }
 
 .btn-primary:hover {
@@ -118,17 +146,26 @@ input[type="date"]:focus {
 }
 
 /* Acciones y filtros */
-.actions, .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
 .filters input {
     flex: 1;
     min-width: 150px;
 }
+
+.actions,
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.actions > *,
+.filters > * {
+  flex-shrink: 0;
+}
+
 
 /* Tabla */
 .table-container {
@@ -279,3 +316,4 @@ tr:hover {
 .modal button:hover {
     background-color: #1557b0;
 }
+

@@ -13,13 +13,13 @@
             <div class="logo">
                 <img src="../concejo.ico" alt="Logo del Concejo Municipal de Maracaibo" width="80" height="80">
             </div>
-            <h1>Concejo Municipal de Maracaibo</h1>
+            <h1>CONCEJO MUNICIPAL DE MARACAIBO</h1>
             <h2>Sistema de Archivos de Matrimonios</h2>
         </header>
 
         <main>
-            <section class="form-section">
-                <h3>Registro de Matrimonio</h3>
+            <section class="form-section" id="form-section" style="display: none;">
+                <h3>Insertar Registro de Matrimonio</h3>
                 <form id="formulario">
                     <div class="form-group">
                         <label for="libro">Consecutivo (Libro):</label>
@@ -70,25 +70,33 @@
                 </form>
             </section>
 
+            
             <section class="data-section">
+                
+                <h2>Insertar nuevo registro a la Data de Matrimonio</h3>
+                    <div class="container-bt">
+                        <button id="toggle-form" class="btn btn-secondary">Insertar Registro</button>
+                    </div>
+                
+                <h2>Ver Data y Filtrar Registros</h3>
                 <div class="actions">
-                    <button id="mostrar-data" class="btn btn-secondary">Mostrar datos</button>
-                    <button id="aplicar-filtros" class="btn btn-secondary">Filtrar</button>
-                    <button id="limpiar-data" class="btn btn-secondary">Limpiar Data</button> <!-- Nuevo botón -->
+                    <button id="mostrar-data" class="btn btn-secondary">Mostrar toda la data</button>
+                    <button id="aplicar-filtros" class="btn btn-secondary">Aplicar Filtros</button>
+                    <button id="limpiar-data" class="btn btn-secondary">Limpiar la tabla de Registros</button> <!-- Nuevo botón -->
                 </div>
 
                 <div class="filters">
                     <input type="text" id="filter-libro" placeholder="Consecutivo">
-                    <input type="text" id="filter-expediente" placeholder="Tomo">
+                    <input type="text" id="filter-tomo" placeholder="Expediente">
                     <input type="text" id="filter-novio" placeholder="Esposo">
                     <input type="text" id="filter-novia" placeholder="Esposa">
-                    <input type="text" id="filter-tomo" placeholder="Expediente">
+                    <input type="text" id="filter-expediente" placeholder="Tomo">
                     <input type="text" id="filter-folio" placeholder="Folio">
                     <input type="text" id="filter-anio" placeholder="Año">
                     <input type="text" id="filter-apellido" placeholder="Operador">
-                    <input type="date" id="filter-fecha" placeholder="Fecha de Registro">
+                    <input type="text" id="filter-fecha" placeholder="Fecha de Registro">
                 <!-- ... existing HTML ... -->
-                <button id="limpiar-filtros">Limpiar Filtros</button>
+                <button id="limpiar-filtros"  class="btn btn-secondary">Limpiar Filtros</button>
                 <!-- ... existing HTML ... -->
                 </div>
 

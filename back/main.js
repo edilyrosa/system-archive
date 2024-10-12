@@ -1,3 +1,102 @@
+// const { app, BrowserWindow, ipcMain } = require('electron');
+// const sqlite3 = require('sqlite3').verbose();
+// const path = require('path');
+
+// let db;
+// const RECORDS_PER_PAGE = 1000; // Límite de registros por consulta
+
+// function createWindow() {
+//     const win = new BrowserWindow({
+//         width: 1200,
+//         height: 1000,
+//         webPreferences: {
+//             nodeIntegration: true,
+//             contextIsolation: false,
+//         },
+//     });
+
+//     win.loadFile('index.html');
+// }
+
+// app.whenReady().then(() => {
+//     const dbPath = path.join('C:', 'Users', 'edily', 'Desktop', 'matri.db'); // Ruta directa a la base de datos
+
+//     db = new sqlite3.Database(dbPath, (err) => {
+//         if (err) {
+//             sendErrorToFrontend("Error al conectar a la base de datos: " + err.message);
+//             return;
+//         }
+//         console.log('Conectado a la base de datos SQLite matri.db.');
+
+//         obtenerRegistros(0); // Cargar la primera página al iniciar
+//     });
+
+//     createWindow();
+
+//     app.on('activate', () => {
+//         if (BrowserWindow.getAllWindows().length === 0) {
+//             createWindow();
+//         }
+//     });
+// });
+
+// // Función para obtener registros con paginación
+// function obtenerRegistros(page) {
+//     const offset = page * RECORDS_PER_PAGE;
+//     const query = `SELECT * FROM usuarios LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
+
+//     db.all(query, [], (err, rows) => {
+//         if (err) {
+//             sendErrorToFrontend("Error al obtener registros: " + err.message);
+//             return;
+//         }
+
+//         const win = BrowserWindow.getAllWindows()[0];
+//         win.webContents.send('actualizar-registros', rows, offset); // Pasar offset para el contador
+//     });
+// }
+
+// // Manejar solicitudes de paginación desde el frontend
+// ipcMain.on('cargar-pagina', (event, page) => {
+//     obtenerRegistros(page);
+// });
+
+// // Crear un nuevo registro en la tabla usuarios
+// ipcMain.on('crear-registro', (event, data) => {
+//     const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = data;
+
+//     if (libro && tomo && novio && novia && expediente && folio && anio && apellido && fecha) {
+//         db.run(`INSERT INTO usuarios (libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+//             [libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha], function (err) {
+//                 if (err) {
+//                     sendErrorToFrontend("Error al crear registro: " + err.message);
+//                     return;
+//                 }
+//                 event.reply('registro-creado', this.lastID);
+//                 obtenerRegistros(0); // Refrescar a la primera página
+//             });
+//     } else {
+//         sendErrorToFrontend("Datos incompletos al crear registro: " + JSON.stringify(data));
+//     }
+// });
+
+// app.on('window-all-closed', () => {
+//     if (process.platform !== 'darwin') {
+//         app.quit();
+//     }
+// });
+
+// // Función para enviar errores al frontend
+// function sendErrorToFrontend(errorMessage) {
+//     const win = BrowserWindow.getAllWindows()[0];
+//     if (win) {
+//         win.webContents.send('mostrar-error', errorMessage);
+//     }
+// }
+
+
+
+
 const { app, BrowserWindow, ipcMain } = require('electron');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
@@ -19,14 +118,14 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    const dbPath = path.join('C:', 'Users', 'edily', 'Desktop', 'matri.db'); // Ruta directa a la base de datos
+    const dbPath = path.join('C:', 'Users', 'edily', 'Desktop', 'matrimoniosqlite.db'); // Ruta directa a la base de datos
 
     db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
             sendErrorToFrontend("Error al conectar a la base de datos: " + err.message);
             return;
         }
-        console.log('Conectado a la base de datos SQLite matri.db.');
+        console.log('Conectado a la base de datos SQLite matrimoniosqlite.db.');
     });
 
     createWindow();

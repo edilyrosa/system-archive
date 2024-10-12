@@ -1,111 +1,129 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>  
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Matrimonios</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-
-        <div class="center-image">
-            <img src="../concejo.ico" alt="concejo" width="100" height="100">
-        </div>
-        <h1>Concejo Municipal de Maracaibo</h1>
-        <h2>Bienvenido al Sistema de Archivos de Matrimonios</h2>
-
-        <!-- Formulario de entrada -->
-        <form id="formulario">
-            <div class="form-row">
-                <label for="libro">Consecutivo (Libro):</label>
-                <input type="text" id="libro" placeholder="Ingresa el consecutivo (libro)" required>
-
-                <label for="tomo">Expediente:</label>
-                <input type="text" id="tomo" placeholder="Ingresa el expediente" required>
+        <header>
+            <div class="logo">
+                <img src="../concejo.ico" alt="Logo del Concejo Municipal de Maracaibo" width="80" height="80">
             </div>
+            <h1>Concejo Municipal de Maracaibo</h1>
+            <h2>Sistema de Archivos de Matrimonios</h2>
+        </header>
 
-            <div class="form-row">
-                <label for="novio">Esposo (Novio):</label>
-                <input type="text" id="novio" placeholder="Ingresa el nombre del esposo (novio)" required>
+        <main>
+            <section class="form-section">
+                <h3>Registro de Matrimonio</h3>
+                <form id="formulario">
+                    <div class="form-group">
+                        <label for="libro">Consecutivo (Libro):</label>
+                        <input type="text" id="libro" placeholder="Ingresa el consecutivo (libro)" required>
+                    </div>
 
-                <label for="novia">Esposa (Novia):</label>
-                <input type="text" id="novia" placeholder="Ingresa el nombre de la esposa (novia)" required>
-            </div>
+                    <div class="form-group">
+                        <label for="tomo">Expediente:</label>
+                        <input type="text" id="tomo" placeholder="Ingresa el expediente" required>
+                    </div>
 
-            <div class="form-row">
-                <label for="expediente">Tomo:</label>
-                <input type="text" id="expediente" placeholder="Ingresa el tomo" required>
+                    <div class="form-group">
+                        <label for="novio">Esposo (Novio):</label>
+                        <input type="text" id="novio" placeholder="Ingresa el nombre del esposo" required>
+                    </div>
 
-                <label for="folio">Folio:</label>
-                <input type="text" id="folio" placeholder="Ingresa el folio" required>
-            </div>
+                    <div class="form-group">
+                        <label for="novia">Esposa (Novia):</label>
+                        <input type="text" id="novia" placeholder="Ingresa el nombre de la esposa" required>
+                    </div>
 
-            <div class="form-row">
-                <label for="anio">Año:</label>
-                <input type="text" id="anio" placeholder="Ingresa el año" required>
+                    <div class="form-group">
+                        <label for="expediente">Tomo:</label>
+                        <input type="text" id="expediente" placeholder="Ingresa el tomo" required>
+                    </div>
 
-                <label for="apellido">Operador (Apellido):</label>
-                <input type="text" id="apellido" placeholder="Ingresa el apellido del operador" required>
+                    <div class="form-group">
+                        <label for="folio">Folio:</label>
+                        <input type="text" id="folio" placeholder="Ingresa el folio" required>
+                    </div>
 
-                <label for="fecha">Fecha de Registro:</label>
-                <input type="text" id="fecha" placeholder="Ingresa la fecha de registro" required>
-            </div>
+                    <div class="form-group">
+                        <label for="anio">Año:</label>
+                        <input type="text" id="anio" placeholder="Ingresa el año" required>
+                    </div>
 
-            <button type="submit">Enviar</button>
-        </form>
+                    <div class="form-group">
+                        <label for="apellido">Operador (Apellido):</label>
+                        <input type="text" id="apellido" placeholder="Ingresa el apellido del operador" required>
+                    </div>
 
-        <!-- Botones para mostrar data y filtrar -->
-        <div>
-            <button id="mostrar-data">Mostrar data</button>
-            <button id="aplicar-filtros">Filtrar</button>
-        </div>
+                    <div class="form-group">
+                        <label for="fecha">Fecha de Registro:</label>
+                        <input type="date" id="fecha" required>
+                    </div>
 
-        <!-- Campos de filtro -->
-        <div>
-            <input type="text" id="filter-libro" placeholder="Consecutivo">
-            <input type="text" id="filter-tomo" placeholder="Tomo">
-            <input type="text" id="filter-novio" placeholder="Esposo">
-            <input type="text" id="filter-novia" placeholder="Esposa">
-            <input type="text" id="filter-expediente" placeholder="Expediente">
-            <input type="text" id="filter-folio" placeholder="Folio">
-            <input type="text" id="filter-anio" placeholder="Año">
-            <input type="text" id="filter-apellido" placeholder="Operador">
-            <input type="text" id="filter-fecha" placeholder="Fecha de Registro">
-        </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
+            </section>
 
-        <!-- Tabla de registros -->
-        <table>
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Consecutivo</th>
-                    <th>Expediente</th>
-                    <th>Esposo</th>
-                    <th>Esposa</th>
-                    <th>Tomo</th>
-                    <th>Folio</th>
-                    <th>Año</th>
-                    <th>Operador</th>
-                    <th>Fecha de Registro</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody id="usuarios-body">
-                <!-- Contenido dinámico -->
-            </tbody>
-        </table>
+            <section class="data-section">
+                <div class="actions">
+                    <button id="mostrar-data" class="btn btn-secondary">Mostrar datos</button>
+                    <button id="aplicar-filtros" class="btn btn-secondary">Filtrar</button>
+                    <button id="limpiar-data" class="btn btn-secondary">Limpiar Data</button> <!-- Nuevo botón -->
+                </div>
 
-        <!-- Paginación -->
-        <div>
-            <button id="prev-page" onclick="changePage('prev')">Anterior</button>
-            <span id="page-number">Página 1</span>
-            <button id="next-page" onclick="changePage('next')">Siguiente</button>
-        </div>
+                <div class="filters">
+                    <input type="text" id="filter-libro" placeholder="Consecutivo">
+                    <input type="text" id="filter-expediente" placeholder="Tomo">
+                    <input type="text" id="filter-novio" placeholder="Esposo">
+                    <input type="text" id="filter-novia" placeholder="Esposa">
+                    <input type="text" id="filter-tomo" placeholder="Expediente">
+                    <input type="text" id="filter-folio" placeholder="Folio">
+                    <input type="text" id="filter-anio" placeholder="Año">
+                    <input type="text" id="filter-apellido" placeholder="Operador">
+                    <input type="date" id="filter-fecha" placeholder="Fecha de Registro">
+                <!-- ... existing HTML ... -->
+                <button id="limpiar-filtros">Limpiar Filtros</button>
+                <!-- ... existing HTML ... -->
+                </div>
+
+                <div class="table-container">
+                    <table id="usuarios-table">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Consecutivo</th>
+                                <th>Expediente</th>
+                                <th>Esposo</th>
+                                <th>Esposa</th>
+                                <th>Tomo</th>
+                                <th>Folio</th>
+                                <th>Año</th>
+                                <th>Operador</th>
+                                <th>Fecha de Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usuarios-body">
+                            <!-- Contenido dinámico -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <button id="prev-page" class="btn btn-secondary">Anterior</button>
+                    <span id="page-number">Página 1</span>
+                    <button id="next-page" class="btn btn-secondary">Siguiente</button>
+                </div>
+            </section>
+        </main>
     </div>
 
-    <!-- Scripts -->
     <script src="../back/renderer.js"></script>
-    <script src="../back/filter.js"></script>
 </body>
 </html>

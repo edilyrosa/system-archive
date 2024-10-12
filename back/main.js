@@ -1,108 +1,9 @@
-// const { app, BrowserWindow, ipcMain } = require('electron');
-// const sqlite3 = require('sqlite3').verbose();
-// const path = require('path');
-
-// let db;
-// const RECORDS_PER_PAGE = 1000; // Límite de registros por consulta
-
-// function createWindow() {
-//     const win = new BrowserWindow({
-//         width: 1200,
-//         height: 1000,
-//         webPreferences: {
-//             nodeIntegration: true,
-//             contextIsolation: false,
-//         },
-//     });
-
-//     win.loadFile('index.html');
-// }
-
-// app.whenReady().then(() => {
-//     const dbPath = path.join('C:', 'Users', 'edily', 'Desktop', 'matri.db'); // Ruta directa a la base de datos
-
-//     db = new sqlite3.Database(dbPath, (err) => {
-//         if (err) {
-//             sendErrorToFrontend("Error al conectar a la base de datos: " + err.message);
-//             return;
-//         }
-//         console.log('Conectado a la base de datos SQLite matri.db.');
-
-//         obtenerRegistros(0); // Cargar la primera página al iniciar
-//     });
-
-//     createWindow();
-
-//     app.on('activate', () => {
-//         if (BrowserWindow.getAllWindows().length === 0) {
-//             createWindow();
-//         }
-//     });
-// });
-
-// // Función para obtener registros con paginación
-// function obtenerRegistros(page) {
-//     const offset = page * RECORDS_PER_PAGE;
-//     const query = `SELECT * FROM usuarios LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
-
-//     db.all(query, [], (err, rows) => {
-//         if (err) {
-//             sendErrorToFrontend("Error al obtener registros: " + err.message);
-//             return;
-//         }
-
-//         const win = BrowserWindow.getAllWindows()[0];
-//         win.webContents.send('actualizar-registros', rows, offset); // Pasar offset para el contador
-//     });
-// }
-
-// // Manejar solicitudes de paginación desde el frontend
-// ipcMain.on('cargar-pagina', (event, page) => {
-//     obtenerRegistros(page);
-// });
-
-// // Crear un nuevo registro en la tabla usuarios
-// ipcMain.on('crear-registro', (event, data) => {
-//     const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = data;
-
-//     if (libro && tomo && novio && novia && expediente && folio && anio && apellido && fecha) {
-//         db.run(`INSERT INTO usuarios (libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-//             [libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha], function (err) {
-//                 if (err) {
-//                     sendErrorToFrontend("Error al crear registro: " + err.message);
-//                     return;
-//                 }
-//                 event.reply('registro-creado', this.lastID);
-//                 obtenerRegistros(0); // Refrescar a la primera página
-//             });
-//     } else {
-//         sendErrorToFrontend("Datos incompletos al crear registro: " + JSON.stringify(data));
-//     }
-// });
-
-// app.on('window-all-closed', () => {
-//     if (process.platform !== 'darwin') {
-//         app.quit();
-//     }
-// });
-
-// // Función para enviar errores al frontend
-// function sendErrorToFrontend(errorMessage) {
-//     const win = BrowserWindow.getAllWindows()[0];
-//     if (win) {
-//         win.webContents.send('mostrar-error', errorMessage);
-//     }
-// }
-
-
-
-
 const { app, BrowserWindow, ipcMain } = require('electron');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 let db;
-const RECORDS_PER_PAGE = 1000; // Límite de registros por consulta
+const RECORDS_PER_PAGE = 1000;
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -115,14 +16,15 @@ function createWindow() {
     });
 
     win.loadFile('front/index.html');
+    win.webContents.openDevTools(); // Abre las herramientas de desarrollo para depuración
 }
 
 app.whenReady().then(() => {
-    const dbPath = path.join('C:', 'Users', 'edily', 'Desktop', 'matrimoniosqlite.db'); // Ruta directa a la base de datos
+    const dbPath = path.join('C:', 'Users', 'edily', 'Desktop', 'matrimoniosqlite.db');
 
     db = new sqlite3.Database(dbPath, (err) => {
         if (err) {
-            sendErrorToFrontend("Error al conectar a la base de datos: " + err.message);
+            console.error("Error al conectar a la base de datos:", err.message);
             return;
         }
         console.log('Conectado a la base de datos SQLite matrimoniosqlite.db.');
@@ -137,90 +39,101 @@ app.whenReady().then(() => {
     });
 });
 
-// Función para obtener registros con paginación
 function obtenerRegistros(page, filters = null) {
     const offset = page * RECORDS_PER_PAGE;
-    let query = `SELECT * FROM usuarios LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
+    let query = `SELECT * FROM usuarios`;
     let params = [];
+    let whereClause = [];
 
     if (filters) {
         const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = filters;
-        const filterConditions = [];
 
         if (libro) {
-            filterConditions.push("libro LIKE ?");
+            whereClause.push("libro LIKE ?");
             params.push(`%${libro}%`);
         }
         if (tomo) {
-            filterConditions.push("tomo LIKE ?");
+            whereClause.push("tomo LIKE ?");
             params.push(`%${tomo}%`);
         }
         if (novio) {
-            filterConditions.push("novio LIKE ?");
+            whereClause.push("novio LIKE ?");
             params.push(`%${novio}%`);
         }
         if (novia) {
-            filterConditions.push("novia LIKE ?");
+            whereClause.push("novia LIKE ?");
             params.push(`%${novia}%`);
         }
         if (expediente) {
-            filterConditions.push("expediente LIKE ?");
+            whereClause.push("expediente LIKE ?");
             params.push(`%${expediente}%`);
         }
         if (folio) {
-            filterConditions.push("folio LIKE ?");
+            whereClause.push("folio LIKE ?");
             params.push(`%${folio}%`);
         }
         if (anio) {
-            filterConditions.push("anio LIKE ?");
+            whereClause.push("anio LIKE ?");
             params.push(`%${anio}%`);
         }
         if (apellido) {
-            filterConditions.push("apellido LIKE ?");
+            whereClause.push("apellido LIKE ?");
             params.push(`%${apellido}%`);
         }
         if (fecha) {
-            filterConditions.push("fecha LIKE ?");
+            whereClause.push("fecha LIKE ?");
             params.push(`%${fecha}%`);
         }
 
-        if (filterConditions.length > 0) {
-            query = `SELECT * FROM usuarios WHERE ${filterConditions.join(' AND ')} LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
+        if (whereClause.length > 0) {
+            query += ` WHERE ${whereClause.join(' AND  ')}`;
         }
     }
 
+    query += ` LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
+
+    console.log('Query:', query); // Para depuración
+    console.log('Params:', params); // Para depuración
+
     db.all(query, params, (err, rows) => {
         if (err) {
-            sendErrorToFrontend("Error al obtener registros: " + err.message);
+            console.error("Error al obtener registros:", err.message);
             return;
         }
 
+        console.log(`Registros obtenidos: ${rows.length}`); // Para depuración
+
         const win = BrowserWindow.getAllWindows()[0];
-        win.webContents.send('actualizar-registros', rows, offset); // Pasar offset para el contador
+        if (win) {
+            win.webContents.send('actualizar-registros', rows, offset);
+        }
     });
 }
 
-// Manejar solicitudes de paginación y filtrado
 ipcMain.on('cargar-pagina', (event, page, filters = null) => {
+    console.log('Evento cargar-pagina recibido:', page, filters); // Para depuración
     obtenerRegistros(page, filters);
 });
 
-// Crear un nuevo registro en la tabla usuarios
 ipcMain.on('crear-registro', (event, data) => {
+    console.log('Evento crear-registro recibido:', data); // Para depuración
     const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = data;
 
     if (libro && tomo && novio && novia && expediente && folio && anio && apellido && fecha) {
-        db.run(`INSERT INTO usuarios (libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha], function (err) {
-                if (err) {
-                    sendErrorToFrontend("Error al crear registro: " + err.message);
-                    return;
-                }
-                event.reply('registro-creado', this.lastID);
-                obtenerRegistros(0); // Refrescar a la primera página
-            });
+        const query = `INSERT INTO usuarios (libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.run(query, [libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha], function (err) {
+            if (err) {
+                console.error("Error al crear registro:", err.message);
+                event.reply('registro-creado', { success: false, error: err.message });
+                return;
+            }
+            console.log(`Nuevo registro creado con ID: ${this.lastID}`);
+            event.reply('registro-creado', { success: true, id: this.lastID });
+            obtenerRegistros(0);
+        });
     } else {
-        sendErrorToFrontend("Datos incompletos al crear registro: " + JSON.stringify(data));
+        console.error("Datos incompletos al crear registro:", data);
+        event.reply('registro-creado', { success: false, error: "Datos incompletos" });
     }
 });
 
@@ -230,10 +143,5 @@ app.on('window-all-closed', () => {
     }
 });
 
-// Función para enviar errores al frontend
-function sendErrorToFrontend(errorMessage) {
-    const win = BrowserWindow.getAllWindows()[0];
-    if (win) {
-        win.webContents.send('mostrar-error', errorMessage);
-    }
-}
+// Agregar console.log para depuración
+console.log('main.js cargado');

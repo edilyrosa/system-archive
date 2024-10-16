@@ -269,7 +269,7 @@ tr:hover {
     justify-content: center;
     align-items: center;
     justify-content: center; /* Centra horizontalmente */
-    background-color: rgba(190, 214, 237, 0.354);
+    text-align: center;
 }
 
 .flex-item-2 { 
@@ -277,6 +277,17 @@ tr:hover {
     padding: 10px; /* Espaciado interno */
     min-width: 0; /* Previene el desbordamiento */
     margin: 5px auto;
+    text-align: center;
+}
+
+#admin-btn, #operator-btn{
+    background: rgb(250,250,250);
+    background: radial-gradient(circle, rgba(250,250,250,1) 20%, rgba(56,111,190,1) 62%, rgba(24,4,22,0.7484243697478992) 98%);
+    border: #032858;
+}
+#admin-btn:hover, #operator-btn:hover{
+    background-color: #030000;
+    border: #ffffff;
 }
 
 /* Responsive */
@@ -361,3 +372,22 @@ tr:hover {
     background-color: #1557b0;
 }
 
+.info-container {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+}
+
+.info-paragraph {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.info-paragraph strong {
+    color: #007BFF;
+}

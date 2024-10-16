@@ -44,7 +44,10 @@ function obtenerRegistros(page, filters = null) {
     let query = `SELECT * FROM usuarios`;
     let params = [];
     let whereClause = [];
+    
 
+
+  
     if (filters) {
         const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = filters;
 
@@ -90,7 +93,10 @@ function obtenerRegistros(page, filters = null) {
         }
     }
 
-    query += ` LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
+
+
+    //query += ` LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
+    query += ` ORDER BY novio ASC`;
 
     console.log('Query:', query); // Para depuración
     console.log('Params:', params); // Para depuración

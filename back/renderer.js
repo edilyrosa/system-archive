@@ -262,3 +262,5 @@ document.getElementById('toggle-form').addEventListener('click', toggleForm);
 
 // Agregar console.log para depuración
 console.log('renderer.js cargado');
+
+

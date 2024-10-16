@@ -94,9 +94,9 @@ function obtenerRegistros(page, filters = null) {
     }
 
 
-
-    //query += ` LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
-    query += ` ORDER BY novio ASC`;
+   // query += ` LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
+   //!registros se ordenan alfabéticamente por novio en orden ascendente +  de 1000 en 1000.
+    query += ` ORDER BY novio ASC LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
 
     console.log('Query:', query); // Para depuración
     console.log('Params:', params); // Para depuración
@@ -151,3 +151,6 @@ app.on('window-all-closed', () => {
 
 // Agregar console.log para depuración
 console.log('main.js cargado');
+
+
+

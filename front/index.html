@@ -18,128 +18,52 @@
         </header>
 
         <main>
-            <section class="form-section" id="form-section" style="display: none;">
-                <h3>Insertar Registro de Matrimonio</h3>
-                <form id="formulario">
-
-                    <div class="flex-container">
-                        <div class="form-group flex-item-2">
-                            <label for="libro">Consecutivo (Libro):</label>
-                            <input type="text" id="libro" placeholder="Ingresa el consecutivo (libro)" required>
-                        </div>
-
-                        <div class="form-group flex-item-2">
-                            <label for="tomo">Expediente:</label>
-                            <input type="text" id="tomo" placeholder="Ingresa el expediente" required>
-                        </div>
-                    </div>
-                    
-                    <div class="flex-container">
-                    <div class="form-group flex-item-2">
-                        <label for="novio">Esposo (Novio):</label>
-                        <input type="text" id="novio" placeholder="Ingresa el nombre del esposo" required>
-                    </div>
-
-                    <div class="form-group flex-item-2">
-                        <label for="novia">Esposa (Novia):</label>
-                        <input type="text" id="novia" placeholder="Ingresa el nombre de la esposa" required>
-                    </div>
+            <section class="info">
+                <p>Bienvenido al Sistema de Archivos de Matrimonios del Concejo Municipal de Maracaibo. Aquí puedes gestionar y consultar los archivos de matrimonios.</p>
+                <h2>Entrar al sistema</h2>
+                <div class="options">
+                    <button id="admin-btn">Administrador</button>
+                    <button id="operator-btn">Operador</button>
                 </div>
-
-                <div class="flex-container">
-
-                    <div class="form-group flex-item-2">
-                        <label for="expediente">Tomo:</label>
-                        <input type="text" id="expediente" placeholder="Ingresa el tomo" required>
-                    </div>
-                    <div class="form-group flex-item-2">
-                        <label for="folio">Folio:</label>
-                        <input type="text" id="folio" placeholder="Ingresa el folio" required>
-                    </div>
-
-                    <div class="form-group flex-item-2">
-                        <label for="anio">Año:</label>
-                        <input type="text" id="anio" placeholder="Ingresa el año" required>
-                    </div>
-                </div>
-                <div class="flex-container">
-                    <div class="form-group flex-item-2">
-                        <label for="apellido">Operador (Apellido):</label>
-                        <input type="text" id="apellido" placeholder="Ingresa el apellido del operador" required>
-                    </div>
-
-                    <div class="form-group flex-item-2">
-                        <label for="fecha">Fecha de Registro:</label>
-                        <input type="date" id="fecha" required>
-                    </div>
-                </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </form>
             </section>
 
-            
-            <section class="data-section">
-                
-                <h2>Insertar nuevo registro a la Data de Matrimonio</h3>
-                    <div class="container-bt">
-                        <button id="toggle-form" class="btn btn-secondary">Insertar Registro</button>
-                    </div>
-                
-                <h2>Ver Data y Filtrar Registros</h3>
-                <div class="actions">
-                    <button id="mostrar-data" class="btn btn-secondary">Mostrar toda la data cada 1000 Registros</button>
-                    <button id="aplicar-filtros" class="btn btn-secondary">Aplicar Filtros</button>
-                    <button id="limpiar-data" class="btn btn-secondary">Limpiar la tabla de Registros</button> <!-- Nuevo botón -->
-                </div>
-
-                <div class="filters">
-                    <input type="text" id="filter-libro" placeholder="Consecutivo">
-                    <input type="text" id="filter-tomo" placeholder="Expediente">
-                    <input type="text" id="filter-novio" placeholder="Esposo">
-                    <input type="text" id="filter-novia" placeholder="Esposa">
-                    <input type="text" id="filter-expediente" placeholder="Tomo">
-                    <input type="text" id="filter-folio" placeholder="Folio">
-                    <input type="text" id="filter-anio" placeholder="Año">
-                    <input type="text" id="filter-apellido" placeholder="Operador">
-                    <input type="text" id="filter-fecha" placeholder="Fecha de Registro">
-                <!-- ... existing HTML ... -->
-                <button id="limpiar-filtros"  class="btn btn-secondary">Limpiar Filtros</button>
-                <!-- ... existing HTML ... -->
-                </div>
-
-                <div class="table-container">
-                    <table id="usuarios-table">
-                        <h2>CRUD del Sistema de Archivos de Matrimonios</h2>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>CONSECUTIVO</th>
-                                <th>EXPEDIENTE</th>
-                                <th>ESPOSO</th>
-                                <th>ESPOSA</th>
-                                <th>TOMO</th>
-                                <th>FOLIO</th>
-                                <th>AÑO</th>
-                                <th>OPERADOR</th>
-                                <th>FECHA DE REGISTRO</th>
-                                <th>ACCIONES</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usuarios-body">
-                            <!-- Contenido dinámico -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="pagination">
-                    <button id="prev-page" class="btn btn-secondary">Anterior</button>
-                    <span id="page-number">Página 1</span>
-                    <button id="next-page" class="btn btn-secondary">Siguiente</button>
-                </div>
+            <!-- Formulario para administrador -->
+            <section id="admin-form" class="hidden">
+                <h3>Iniciar sesión como Administrador</h3>
+                <form>
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" placeholder="admin" required>
+                    <label for="password">Clave:</label>
+                    <input type="password" id="password" placeholder="123456" required>
+                    <button type="submit">Enviar</button>
+                </form>
+                <p id="error-message" class="error hidden">Usuario o clave incorrecta</p>
             </section>
         </main>
     </div>
 
-    <script src="../back/renderer.js"></script>
+    
+
+    <script>
+        document.getElementById('admin-btn').addEventListener('click', () => {
+            document.getElementById('admin-form').classList.remove('hidden');
+        });
+
+        document.getElementById('operator-btn').addEventListener('click', () => {
+            window.location.href = 'operador.html';
+        });
+
+        document.querySelector('#admin-form form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'admin' && password === '123456') {
+                window.location.href = 'admin.html';
+            } else {
+                document.getElementById('error-message').classList.remove('hidden');
+            }
+        });
+    </script>
 </body>
 </html>

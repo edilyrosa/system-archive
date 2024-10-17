@@ -57,5 +57,3 @@ function crearRegistro(db, data, callback) {
 }
 
 module.exports = { obtenerRegistros, crearRegistro };
-
-

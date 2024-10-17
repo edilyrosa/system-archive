@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Administrador</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        .login-card{
+            padding: 30px;
+            width: 90%; /* Aumentar el ancho del contenedor */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background-color: rgba(229, 233, 241, 0.58);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+
+        h3 {
+            font-size: 24px; /* Aumentar tamaño de fuente */
+            margin-bottom: 20px;
+        }
+       
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-size: 18px; /* Aumentar tamaño de fuente */
+        }
+        input {
+            width: 80%;
+            padding: 12px; /* Aumentar padding */
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 16px; /* Aumentar tamaño de fuente */
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            width: 90%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px; /* Aumentar tamaño de fuente */
+        }
+        
+        .btn-send{
+            display: flex;
+            justify-content: center; /* Centra horizontalmente */
+            align-items: center;     /* Centra verticalmente */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            display: none; /* Ocultar por defecto */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>
+            <div class="logo">
+                <img src="../concejo.ico" alt="Logo del Concejo Municipal de Maracaibo" width="150" height="150">
+            </div>
+            <h1>CONCEJO MUNICIPAL DE MARACAIBO</h1>
+            <h2>Sistema de Archivos de Matrimonios</h2>
+            <a href="index.html">Volver a Bienvenida 🏠</a>
+        </header>
+        
+        <main>
+            <div class="login-card">
+                <h3>Iniciar sesión como Administrador</h3>
+        
+                <form id="login-form">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" placeholder="admin" required>
+        
+                    <label for="password">Clave:</label>
+                    <input type="password" id="password" placeholder="123456" required>
+                    
+                    <div class="btn-send">
+                        <button type="submit">Enviar</button>
+                    </div>
+        
+                    <p id="error-message" class="error">Usuario o clave incorrecta</p>
+                </form>
+            </div>
+        </main>
+
+    </div>
+
+    <script src="../back/login.js"></script> <!-- Cargar el archivo login.js -->
+</body>
+</html>

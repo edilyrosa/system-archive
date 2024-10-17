@@ -6,6 +6,7 @@
     <title>Registro de Matrimonios</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval';">
 </head>
 <body>
     <div class="container">
@@ -26,7 +27,7 @@
                     </p>
                 
                     <p class="info-paragraph">
-                        El sistema está dividido en dos roles: <strong>Administrador</strong> y <strong>Operador</strong>. El rol de Administrador tiene acceso completo al sistema, lo que incluye la posibilidad de realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en los registros matrimoniales. Por otro lado, el rol de Operador está limitado a realizar consultas y aplicar filtros a los registros existentes, sin la capacidad de modificar o eliminar datos. Ambos roles tienen acceso a la búsqueda avanzada para garantizar una gestión eficaz de la información.
+                        El sistema está dividido en dos roles: <strong>Administrador</strong> y <strong>Operador</strong>. El rol de Administrador tiene acceso completo al sistema, lo que incluye la posibilidad de realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en los registros matrimoniales. El rol de Operador está limitado a consultas y aplicar filtros, sin capacidad de modificar o eliminar datos. Ambos roles tienen acceso a la búsqueda avanzada para garantizar una gestión eficaz de la información.
                     </p>
                 </div>
                 
@@ -34,60 +35,39 @@
                
                 <div class="options flex-container">
                     <div class="flex-item-2">
-                        <button id="admin-btn"> <div class="logo">
-                                <img src="../admin0.png" alt="Logo del admin" width="300" height="200">
+                        <button id="admin-btn">
+                            <div class="logo">
+                                <img src="../admin0.png" alt="Logo del administrador" width="300" height="200">
                             </div>
                         </button>
                         <p><b>Administrador del sistema</b></p>
                     </div>
 
                     <div class="flex-item-2">
-                        <button id="operator-btn"> <div class="logo">
-                            <img src="../user0.png" alt="Logo del admin" width="300" height="200">
+                        <button id="operator-btn">
+                            <div class="logo">
+                                <img src="../user0.png" alt="Logo del operador" width="300" height="200">
+                            </div>
                         </button>
                         <p><b>Operador del sistema</b></p>
                     </div>
                 </div>
-
-                </div>
             </section>
 
-            <!-- Formulario para administrador -->
-            <section id="admin-form" class="hidden">
-                <h3>Iniciar sesión como Administrador</h3>
-                <form>
-                    <label for="username">Usuario:</label>
-                    <input type="text" id="username" placeholder="admin" required>
-                    <label for="password">Clave:</label>
-                    <input type="password" id="password" placeholder="123456" required>
-                    <button type="submit">Enviar</button>
-                </form>
-                <p id="error-message" class="error hidden">Usuario o clave incorrecta</p>
-            </section>
         </main>
     </div>
 
-    
-
     <script>
-        document.getElementById('admin-btn').addEventListener('click', () => {
-            document.getElementById('admin-form').classList.remove('hidden');
-        });
+        const operatorBtn = document.getElementById('operator-btn');
 
-        document.getElementById('operator-btn').addEventListener('click', () => {
+        // Redirigir al operador al presionar el botón de operador
+        operatorBtn.addEventListener('click', () => {
             window.location.href = 'operador.html';
         });
 
-        document.querySelector('#admin-form form').addEventListener('submit', function (event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === 'admin' && password === '123456') {
-                window.location.href = 'admin.html';
-            } else {
-                document.getElementById('error-message').classList.remove('hidden');
-            }
+        // Redirigir al administrador al presionar el botón admin
+        document.getElementById('admin-btn').addEventListener('click', () => {
+            window.location.href = 'login.html'; // Redirige a login.html
         });
     </script>
 </body>

@@ -19,6 +19,7 @@ function createWindow() {
     win.webContents.openDevTools(); // Abre las herramientas de desarrollo para depuración
 }
 
+// LOGS OF DB CONEXION
 app.whenReady().then(() => {
     const dbPath = path.join('C:', 'Users', 'edily', 'Desktop', 'matrimoniosqlite.db');
 
@@ -45,9 +46,6 @@ function obtenerRegistros(page, filters = null) {
     let params = [];
     let whereClause = [];
     
-
-
-  
     if (filters) {
         const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = filters;
 

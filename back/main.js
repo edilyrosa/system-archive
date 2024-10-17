@@ -45,46 +45,16 @@ function obtenerRegistros(page, filters = null) {
     let query = `SELECT * FROM usuarios`;
     let params = [];
     let whereClause = [];
-    
-    if (filters) {
-        const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = filters;
 
-        if (libro) {
-            whereClause.push("libro LIKE ?");
-            params.push(`%${libro}%`);
-        }
-        if (tomo) {
-            whereClause.push("tomo LIKE ?");
-            params.push(`%${tomo}%`);
-        }
-        if (novio) {
-            whereClause.push("novio LIKE ?");
-            params.push(`%${novio}%`);
-        }
-        if (novia) {
-            whereClause.push("novia LIKE ?");
-            params.push(`%${novia}%`);
-        }
-        if (expediente) {
-            whereClause.push("expediente LIKE ?");
-            params.push(`%${expediente}%`);
-        }
-        if (folio) {
-            whereClause.push("folio LIKE ?");
-            params.push(`%${folio}%`);
-        }
-        if (anio) {
-            whereClause.push("anio LIKE ?");
-            params.push(`%${anio}%`);
-        }
-        if (apellido) {
-            whereClause.push("apellido LIKE ?");
-            params.push(`%${apellido}%`);
-        }
-        if (fecha) {
-            whereClause.push("fecha LIKE ?");
-            params.push(`%${fecha}%`);
-        }
+    if (filters) {
+        const filterKeys = ['libro', 'tomo', 'novio', 'novia', 'expediente', 'folio', 'anio', 'apellido', 'fecha'];
+
+        filterKeys.forEach(key => {
+            if (filters[key]) {
+                whereClause.push(`${key} LIKE ?`);
+                params.push(`%${filters[key]}%`);
+            }
+        });
 
         if (whereClause.length > 0) {
             query += ` WHERE ${whereClause.join(' AND  ')}`;
@@ -149,6 +119,3 @@ app.on('window-all-closed', () => {
 
 // Agregar console.log para depuración
 console.log('main.js cargado');
-
-
-

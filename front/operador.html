@@ -26,8 +26,8 @@
 
                     <div class="flex-container">
                         <div class="form-group flex-item-2">
-                            <label for="libro">Consecutivo (Libro):</label>
-                            <input type="text" id="libro" placeholder="Ingresa el consecutivo (libro)" required>
+                            <label for="consecutivo">Consecutivo (consecutivo):</label>
+                            <input type="text" id="consecutivo" placeholder="Ingresa el consecutivo (consecutivo)" required>
                         </div>
 
                         <div class="form-group flex-item-2">
@@ -38,13 +38,13 @@
                     
                     <div class="flex-container">
                     <div class="form-group flex-item-2">
-                        <label for="novio">Esposo (Novio):</label>
-                        <input type="text" id="novio" placeholder="Ingresa el nombre del esposo" required>
+                        <label for="caballero">Esposo (caballero):</label>
+                        <input type="text" id="caballero" placeholder="Ingresa el nombre del esposo" required>
                     </div>
 
                     <div class="form-group flex-item-2">
-                        <label for="novia">Esposa (Novia):</label>
-                        <input type="text" id="novia" placeholder="Ingresa el nombre de la esposa" required>
+                        <label for="dama">Esposa (dama):</label>
+                        <input type="text" id="dama" placeholder="Ingresa el nombre de la esposa" required>
                     </div>
                 </div>
 
@@ -66,8 +66,8 @@
                 </div>
                 <div class="flex-container">
                     <div class="form-group flex-item-2">
-                        <label for="apellido">Operador (Apellido):</label>
-                        <input type="text" id="apellido" placeholder="Ingresa el apellido del operador" required>
+                        <label for="operador">Operador (operador):</label>
+                        <input type="text" id="operador" placeholder="Ingresa el operador del operador" required>
                     </div>
 
                     <div class="form-group flex-item-2">
@@ -95,22 +95,23 @@
                 </div>
 
                 <div class="filters">
-                    <input type="text" id="filter-libro" placeholder="Consecutivo">
-                    <input type="text" id="filter-tomo" placeholder="Expediente">
-                    <input type="text" id="filter-novio" placeholder="Esposo">
-                    <input type="text" id="filter-novia" placeholder="Esposa">
-                    <input type="text" id="filter-expediente" placeholder="Tomo">
+                    <input type="text" id="filter-consecutivo" placeholder="Consecutivo">
+                    <input type="text" id="filter-expediente" placeholder="Expediente">
+                    <input type="text" id="filter-caballero" placeholder="Esposo">
+                    <input type="text" id="filter-dama" placeholder="Esposa">
+                    <input type="text" id="filter-tomo" placeholder="Tomo">
                     <input type="text" id="filter-folio" placeholder="Folio">
                     <input type="text" id="filter-anio" placeholder="Año">
-                    <input type="text" id="filter-apellido" placeholder="Operador">
+                    <input type="text" id="filter-operador" placeholder="Operador">
                     <input type="text" id="filter-fecha" placeholder="Fecha de Registro">
+                    
                 <!-- ... existing HTML ... -->
                 <button id="limpiar-filtros"  class="btn btn-secondary">Limpiar Filtros</button>
                 <!-- ... existing HTML ... -->
                 </div>
 
                 <div class="table-container">
-                    <table id="usuarios-table">
+                    <table id="matrimonios-table">
                         <h2>CRUD del Sistema de Archivos de Matrimonios</h2>
                         <thead>
                             <tr>
@@ -127,7 +128,7 @@
                                 <th>ACCIONES</th>
                             </tr>
                         </thead>
-                        <tbody id="usuarios-body">
+                        <tbody id="matrimonios-body">
                             <!-- Contenido dinámico -->
                         </tbody>
                     </table>

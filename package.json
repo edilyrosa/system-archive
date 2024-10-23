@@ -4,7 +4,8 @@
   "description": "Esta es una App para llevar el registro de un sistema de archivos",
   "main": "back/main.js",
   "scripts": {
-    "start": "electron --max-old-space-size=4096 .",
+    "start": "npm run build:styles && electron --max-old-space-size=4096 .",
+    "build:styles": "postcss front/style.css -o public/style.css",
     "build": "electron-builder",
     "package": "npm run build && electron-builder",
     "test": "echo \"Error: no test especificado\" && exit 1"
@@ -13,12 +14,19 @@
   "author": "Edily Mora",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^10.4.20",
     "electron": "^32.1.1",
-    "electron-builder": "^25.0.5"
+    "electron-builder": "^25.0.5",
+    "postcss": "^8.4.47",
+    "postcss-cli": "^11.0.0",
+    "tailwindcss": "^3.4.14"
   },
   "dependencies": {
+    "mysql2": "^3.11.3",
     "rcedit": "^4.0.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "ts-import": "^5.0.0-beta.0",
+    "uuid": "^10.0.0"
   },
   "build": {
     "appId": "com.tuempresa.pocarchive",

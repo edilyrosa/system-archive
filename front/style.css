@@ -1,13 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Estilos generales */
 body {
+    max-width: 100%;
+    width: 100%;
     font-family: 'Roboto', Arial, sans-serif;
     background-color: #f0f2f5;
-    margin: 0;
-    padding: 0;
+    margin: 5px;
+    padding: 5px;
     color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
 
 main{
@@ -15,39 +22,38 @@ main{
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0;
+    padding: 0;
 }
 
-.container {
-    max-width: 1200px;
-    width: 98%;
+.container-home {
+    justify-content: center;
+    max-width: 100%;
+    width: 100%;
     margin: 5px auto;
-    padding: 20px;
+    padding: 10px;
+}
+
+.info{
+    max-width: 100%;
+    width: 100%;
+    font-size: 18px;
+    
 }
 
 /* Encabezado */
 header {
     background-color: #ffffff;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    margin-bottom: 20px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 20px 20px 20px rgba(3, 95, 145, 0.509);
 }
 
-.logo {
-    margin-bottom: 10px;
-}
-
-.logo img {
-    max-width: 100%;
-    height: auto;
-}
-
 h1 {
     color: #79a9e8;
-    margin: 15px auto;
+    margin: 5px auto;
     font-size: 24px;
     font-size: 35px;
     font-weight: 800;
@@ -55,20 +61,42 @@ h1 {
 
 h2 {
     color: #0f55b0;
-    margin: 20px auto;
+    margin: 5px auto;
     font-size: 25px;
     font-weight: 800;
     text-align: center;
 }
+
 h3 {
-    color: #192637;
     margin: 20px auto;
-    font-size: 20px;
     font-weight: 400;
     text-align: center;
+    color: #1a73e8;
+    margin-top: 0;
+    font-size: 20px;
 }
 
-/* Secciones principales */
+div.logo-header{
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+div.logo-header img{
+    margin:0 auto;
+    text-align: center;
+    justify-content: center;
+    
+}
+
+#span-header{
+    font-size: 10px;
+    padding: 4px;
+   justify-content: start;
+   text-align: justify;
+
+}
+
+/* //! agregar al FORM DE INSERTA Secciones principales 
 .form-section, .data-section {
     background-color: #ffffff;
     border-radius: 8px;
@@ -81,13 +109,7 @@ h3 {
 .form-section * {
     width:98%;
 }
-
-
-h3 {
-    color: #1a73e8;
-    margin-top: 0;
-    font-size: 20px;
-}
+*/
 
 /* Formulario */
 .form-group {
@@ -112,6 +134,7 @@ input[type="date"] {
     transition: border-color 0.3s;
 }
 
+input[type="password"]:focus,
 input[type="text"]:focus,
 input[type="date"]:focus {
     border-color: #1a73e8;
@@ -383,11 +406,14 @@ tr:hover {
     background-color: #1557b0;
 }
 
+
+
 .info-container {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
+    width: 90%;
+    padding: 5px;
+    /* border-radius: 10px; */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    margin: 5px auto;
 }
 
 .info-paragraph {
@@ -401,4 +427,102 @@ tr:hover {
 
 .info-paragraph strong {
     color: #007BFF;
+}
+
+
+/* Agregar estilos para login - en bienvenida */
+div.login-card{
+    padding: 5px;
+    width: 60%; /* Aumentar el ancho del contenedor */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background-color: rgba(229, 233, 241, 0.58);
+    border-radius: 8px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+input#username,
+input#password{
+    width: 50%;
+}
+
+
+h3 {
+    font-size: 24px; /* Aumentar tamaño de fuente */
+    margin-bottom: 20px;
+}
+
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 18px; /* Aumentar tamaño de fuente */
+}
+input {
+    width: 80%;
+    padding: 12px; /* Aumentar padding */
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px; /* Aumentar tamaño de fuente */
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    width: 90%;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px; /* Aumentar tamaño de fuente */
+}
+
+.btn-send{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    margin: 0 auto;
+    width: 55%;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+.error {
+    color: red;
+    display: none; /* Ocultar por defecto */
+}
+
+a.center {
+    text-decoration: underline; /* Subrayado */
+    text-align: center;
+}
+
+
+p.text-gray{
+    margin: 0 auto;
+    text-align: center;
+    color: #898989; /* Color gris */
+
+}
+
+/* Estilos para el navbar */
+
+.navBar nav {
+    display: flex; /* Activa flexbox */
+    justify-content: space-between; /* Distribuye los enlaces uniformemente */
+}
+
+.navBar a {
+    flex: 1; /* Cada enlace ocupa el mismo espacio */
+    text-align: center; /* Centra el texto dentro de cada enlace */
+    color: white; /* Color del texto blanco */
+    text-decoration: none; /* Elimina el subrayado */
+    padding: 8px 0; /* Espaciado vertical dentro de los enlaces */
+}
+
+.navBar a:hover {
+    color: #3981df; /* Cambia el color al pasar el mouse */
 }

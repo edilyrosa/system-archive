@@ -3,21 +3,21 @@ const RECORDS_PER_PAGE = 1000;
 
 function obtenerRegistros(db, page, filters = null, callback) {
     const offset = page * RECORDS_PER_PAGE;
-    let query = `SELECT * FROM usuarios`;
+    let query = `SELECT * FROM matrimonios`;
     let params = [];
     let whereClause = [];
 
     if (filters) {
-        const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = filters;
+        const { consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha } = filters;
 
-        if (libro) whereClause.push("libro LIKE ?");
-        if (tomo) whereClause.push("tomo LIKE ?");
-        if (novio) whereClause.push("novio LIKE ?");
-        if (novia) whereClause.push("novia LIKE ?");
-        if (expediente) whereClause.push("expediente LIKE ?");
+        if (consecutivo) whereClause.push("consecutivo LIKE ?");
+        if (tomo) whereClause.push("expediente LIKE ?");
+        if (caballero) whereClause.push("caballero LIKE ?");
+        if (dama) whereClause.push("dama LIKE ?");
+        if (expediente) whereClause.push("tomo LIKE ?");
         if (folio) whereClause.push("folio LIKE ?");
         if (anio) whereClause.push("anio LIKE ?");
-        if (apellido) whereClause.push("apellido LIKE ?");
+        if (operador) whereClause.push("operador LIKE ?");
         if (fecha) whereClause.push("fecha LIKE ?");
 
         params.push(...Object.values(filters).filter(Boolean).map(val => `%${val}%`));
@@ -27,7 +27,7 @@ function obtenerRegistros(db, page, filters = null, callback) {
         }
     }
 
-    query += ` ORDER BY novio ASC LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
+    query += ` ORDER BY caballero ASC LIMIT ${RECORDS_PER_PAGE} OFFSET ${offset}`;
 
     db.all(query, params, (err, rows) => {
         if (err) {
@@ -40,11 +40,11 @@ function obtenerRegistros(db, page, filters = null, callback) {
 }
 
 function crearRegistro(db, data, callback) {
-    const { libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha } = data;
+    const { consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha } = data;
 
-    if (libro && tomo && novio && novia && expediente && folio && anio && apellido && fecha) {
-        const query = `INSERT INTO usuarios (libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-        db.run(query, [libro, tomo, novio, novia, expediente, folio, anio, apellido, fecha], function (err) {
+    if (consecutivo && expediente && caballero && dama && tomo && folio && anio && operador && fecha) {
+        const query = `INSERT INTO matrimonios (consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.run(query, [consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha], function (err) {
             if (err) {
                 callback(err, null);
                 return;

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Registros - Bienvenida</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="../public/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+
+    <body>
+        <div class="container">
+            <header>
+                <div class="logo-header">
+                    <p id="span-header" >Bienvenido Admintrador</p>
+                    <img src="../concejo.ico" alt="Logo del Concejo Municipal de Maracaibo" width="100" height="100">
+                </div>
+                <h1>SISTEMA DE ARCHIVOS DE MATRIMONIOS</h1>
+                <div class="navBar">
+                    <nav class="flex justify-between"></nav>
+                        <a href="index.html" class="flex-1 text-white text-center hover:text-gray-300">Bienvenida 🏠</a>
+                        <a href="menuArchivos.html" class="flex-1 text-white text-center hover:text-gray-300">Menu de archivos 🗃️</a>
+                        <a href="buscarMatrimonios.html" class="flex-1 text-white text-center hover:text-gray-300">Buscar Registro 🔎</a>
+                        <a href="insertaMatrimonio.html" class="flex-1 text-white text-center hover:text-gray-300" style="text-decoration: underline;">Insertar Registro 📂</a>
+                        <a href="index.html" class="flex-1 text-white text-center hover:text-gray-300">Soporte Técnico 👨🏽‍💻</a>
+                        <a href="index.html" class="flex-1 text-white text-center hover:text-gray-300">Cerrar Sesión 🔐</a>
+                    </nav>
+                </div>
+            </header>
+
+            <main>
+                
+                <section class="form-section" id="form-section" style="display: none;">
+                    <h3>Insertar Registro de Matrimonio</h3>
+                    
+                    <form id="formulario">
+
+                        <div class="flex-container">
+                            <div class="form-group flex-item-2">
+                                <label for="consecutivo">Consecutivo (consecutivo):</label>
+                                <input type="text" id="consecutivo" placeholder="Ingresa el consecutivo (consecutivo)" required>
+                            </div>
+
+                            <div class="form-group flex-item-2">
+                                <label for="tomo">Expediente:</label>
+                                <input type="text" id="tomo" placeholder="Ingresa el expediente" required>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-container">
+                        <div class="form-group flex-item-2">
+                            <label for="caballero">Esposo (caballero):</label>
+                            <input type="text" id="caballero" placeholder="Ingresa el nombre del esposo" required>
+                        </div>
+
+                        <div class="form-group flex-item-2">
+                            <label for="dama">Esposa (dama):</label>
+                            <input type="text" id="dama" placeholder="Ingresa el nombre de la esposa" required>
+                        </div>
+                    </div>
+
+                    <div class="flex-container">
+
+                        <div class="form-group flex-item-2">
+                            <label for="expediente">Tomo:</label>
+                            <input type="text" id="expediente" placeholder="Ingresa el tomo" required>
+                        </div>
+                        <div class="form-group flex-item-2">
+                            <label for="folio">Folio:</label>
+                            <input type="text" id="folio" placeholder="Ingresa el folio" required>
+                        </div>
+
+                        <div class="form-group flex-item-2">
+                            <label for="anio">Año:</label>
+                            <input type="text" id="anio" placeholder="Ingresa el año" required>
+                        </div>
+                    </div>
+                    <div class="flex-container">
+                        <div class="form-group flex-item-2">
+                            <label for="operador">Operador (operador):</label>
+                            <input type="text" id="operador" placeholder="Ingresa el operador del operador" required>
+                        </div>
+
+                        <div class="form-group flex-item-2">
+                            <label for="fecha">Fecha de Registro:</label>
+                            <input type="date" id="fecha" required>
+                        </div>
+                    </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
+
+                </section>
+
+                
+                <section class="data-section">
+                    
+                    <h2>Insertar nuevo registro a la Data de Matrimonio</h3>
+                        <div class="container-bt">
+                            <button id="toggle-form" class="btn btn-secondary">Insertar Registro</button>
+                        </div>
+                    
+
+
+                    <h2>Ver Data y Filtrar Registros</h3>
+                    <div class="actions">
+                        <button id="mostrar-data" class="btn btn-secondary">Mostrar toda la data cada 1000 Registros</button>
+                        <button id="aplicar-filtros" class="btn btn-secondary">Aplicar Filtros</button>
+                        <button id="limpiar-data" class="btn btn-secondary">Limpiar la tabla de Registros</button> <!-- Nuevo botón -->
+                    </div>
+
+                    <div class="filters">
+                        <input type="text" id="filter-consecutivo" placeholder="Consecutivo">
+                        <input type="text" id="filter-expediente" placeholder="Expediente">
+                        <input type="text" id="filter-caballero" placeholder="Esposo">
+                        <input type="text" id="filter-dama" placeholder="Esposa">
+                        <input type="text" id="filter-tomo" placeholder="Tomo">
+                        <input type="text" id="filter-folio" placeholder="Folio">
+                        <input type="text" id="filter-anio" placeholder="Año">
+                        <input type="text" id="filter-operador" placeholder="Operador">
+                        <input type="text" id="filter-fecha" placeholder="Fecha de Registro">
+                    <!-- ... existing HTML ... -->
+                    <button id="limpiar-filtros"  class="btn btn-secondary">Limpiar Filtros</button>
+                    <!-- ... existing HTML ... -->
+                    </div>
+
+                    <div class="table-container">
+                        <table id="matrimonios-table">
+                            <h2>CRUD del Sistema de Archivos de Matrimonios</h2>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>CONSECUTIVO</th>
+                                    <th>EXPEDIENTE</th>
+                                    <th>ESPOSO</th>
+                                    <th>ESPOSA</th>
+                                    <th>TOMO</th>
+                                    <th>FOLIO</th>
+                                    <th>AÑO</th>
+                                    <th>OPERADOR</th>
+                                    <th>FECHA DE REGISTRO</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="matrimonios-body">
+                                <!-- Contenido dinámico -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination">
+                        <button id="prev-page" class="btn btn-secondary">Anterior</button>
+                        <span id="page-number">Página 1</span>
+                        <button id="next-page" class="btn btn-secondary">Siguiente</button>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <script src="../back/renderer.js"></script>
+    </body>
+</html>
+

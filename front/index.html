@@ -1,61 +1,73 @@
+<!-- npm run build:styles -->
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Matrimonios</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Sistema de Registros - Bienvenida</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="../public/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="container-home">
         <header>
-            <div class="logo">
-                <img src="../concejo.ico" alt="Logo del Concejo Municipal de Maracaibo" width="150" height="150">
+            <div class="w-full text-center">
+                <div class="logo-header">
+
+                    <img src="../concejo.ico" alt="Logo del Concejo Municipal de Maracaibo" width="150" height="150">
+                </div>
             </div>
             <h1>CONCEJO MUNICIPAL DE MARACAIBO</h1>
-            <h2>Sistema de Archivos de Matrimonios</h2>
+            <h2>Sistema de Archivo</h2>
         </header>
 
         <main>
             <section class="info">
+                
                 <div class="info-container">
                     <p class="info-paragraph">
-                        Bienvenido al Sistema de Archivos de Matrimonios del Concejo Municipal de Maracaibo. Aquí puedes gestionar y consultar los archivos de matrimonios.
-                        El sistema cuenta con un panel de consultas para visualizar los registros de manera eficiente, aplicando filtros por campos específicos, y ofrece paginación para manejar grandes volúmenes de datos de forma rápida y organizada.
+                        Bienvenido al Sistema de Archivo del Concejo Municipal de Maracaibo. Inicia sesión y según los privilegios de tu rol, podrás:                         
+                        <ul>
+                            <li>✅ Consultar los registros de Matrimonios, Cementerio, Laboral y Actas de Sesiones del Concejo, Decretos, Construcciones, Ejidos.</li>
+                            <li>✅ Realizar búsquedas filtradas de registros.</li>
+                            <li>✅ Realizar actualización y eliminación de registros.</li>
+                        </ul>
                     </p>
-                
-                    <p class="info-paragraph">
-                        El sistema está dividido en dos roles: <strong>Administrador</strong> y <strong>Operador</strong>. El rol de Administrador tiene acceso completo al sistema, lo que incluye la posibilidad de realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) en los registros matrimoniales. El rol de Operador está limitado a consultas y aplicar filtros, sin capacidad de modificar o eliminar datos. Ambos roles tienen acceso a la búsqueda avanzada para garantizar una gestión eficaz de la información.
-                    </p>
+        
                 </div>
                 
-                <h2>PRESIONA SOBRE LA IMAGEN DE TU ROL PARA ENTRAR AL SISTEMA.</h2>
-               
-                <div class="options flex-container">
-                    <div class="flex-item-2">
-                        <button id="admin-btn">
-                            <div class="logo">
-                                <img src="../admin0.png" alt="Logo del administrador" width="300" height="200">
+                <h2>INICIA SESIÓN.</h2>
+                    <div class="login-card container">
+                        <form id="login-form">
+                            <label for="username">Usuario:</label>
+                            <input type="text" id="username" placeholder="admin" required>
+                    
+                            <label for="password">Clave:</label>
+                            <input type="password" id="password" placeholder="123456" required>
+                                
+                            <div class="btn-send">
+                                <button type="submit">ENVIAR</button>
                             </div>
-                        </button>
-                        <p><b>Administrador del sistema</b></p>
+                    
+                            <p id="error-message" class="error">Usuario o clave incorrecta</p>
+                        </form>
                     </div>
-
-                    <div class="flex-item-2">
-                        <button id="operator-btn">
-                            <div class="logo">
-                                <img src="../user0.png" alt="Logo del operador" width="300" height="200">
-                            </div>
-                        </button>
-                        <p><b>Operador del sistema</b></p>
-                    </div>
+         
+                <div class="info-container">
+                        <p class="info-paragraph text-gray">
+                            ¿No tienes una cuenta y deseas registrarte? ¿U olvidaste tus credencias? Por favor, comunícate con soporte técnico                        <br/>
+                             <!-- <a class="link" href="correo.html">Departamento de Tecnología e Informática</a>👨🏽‍💻 -->
+                             <a class="center text-blue-500 underline hover:text-blue-700 cursor-pointer text-center mx-auto justify-center" href="correo.html">Departamento de Tecnología e Informática</a>👨🏽‍💻
+                        </p>
                 </div>
             </section>
 
         </main>
     </div>
 
+    <script src="../back/login.js"></script> <!-- Cargar el archivo login.js -->
     <script>
         const operatorBtn = document.getElementById('operator-btn');
 

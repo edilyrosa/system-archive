@@ -5,8 +5,8 @@ const pageSize = 1000;
 let filters = null;
 
 function actualizarTabla(rows, offset) {
-    const tbody = document.getElementById('usuarios-body');
-    const table = document.getElementById('usuarios-table');
+    const tbody = document.getElementById('matrimonios-body');
+    const table = document.getElementById('matrimonios-table');
     const noDataMessage = document.getElementById('no-data-message');
 
     if (rows.length === 0) {
@@ -22,15 +22,19 @@ function actualizarTabla(rows, offset) {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${index + 1 + offset}</td>
-                <td>${row.libro}</td>
-                <td>${row.tomo}</td>
-                <td>${row.novio}</td>
-                <td>${row.novia}</td>
+                <td>${row.consecutivo}</td>
                 <td>${row.expediente}</td>
+                <td>${row.caballero}</td>
+                <td>${row.dama}</td>
+                <td>${row.tomo}</td>
                 <td>${row.folio}</td>
                 <td>${row.anio}</td>
-                <td>${row.apellido}</td>
-                <td>${row.fecha}</td>
+                <td>${row.operador}</td>
+                <td>${row.fecha.toLocaleDateString('es-ES', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                  })}</td>
                 <td><button class='button-table'>Actualizar</button> <button class='button-table'>Eliminar</button></td>
             `;
             tbody.appendChild(tr);
@@ -72,16 +76,31 @@ function mostrarData() {
     actualizarVisibilidadPaginacion();
 }
 
+function mostrarDataMaria() {
+    filters = null;
+     currentPage = 0;
+     ipcRenderer.send('cargar-pagina-mariadb', currentPage, filters);
+ 
+     // Mostrar la tabla y la paginación
+     const tableContainer = document.querySelector('.table-container');
+     const pagination = document.querySelector('.pagination');
+     tableContainer.style.display = 'block'; // Asegurarse de que la tabla sea visible
+     pagination.style.display = 'flex'; // Asegurarse de que la paginación sea visible
+ 
+     // Actualizar la visibilidad de la paginación
+     actualizarVisibilidadPaginacion();
+ }
+ 
 function aplicarFiltros() {
     filters = {
-        libro: document.getElementById('filter-libro').value,
+        consecutivo: document.getElementById('filter-consecutivo').value,
         tomo: document.getElementById('filter-tomo').value,
-        novio: document.getElementById('filter-novio').value,
-        novia: document.getElementById('filter-novia').value,
+        caballero: document.getElementById('filter-caballero').value,
+        dama: document.getElementById('filter-dama').value,
         expediente: document.getElementById('filter-expediente').value,
         folio: document.getElementById('filter-folio').value,
         anio: document.getElementById('filter-anio').value,
-        apellido: document.getElementById('filter-apellido').value,
+        operador: document.getElementById('filter-operador').value,
         fecha: document.getElementById('filter-fecha').value,
     };
 
@@ -108,14 +127,14 @@ function aplicarFiltros() {
 function enviarFormulario(event) {
     event.preventDefault();
     const formData = {
-        libro: document.getElementById('libro').value,
+        consecutivo: document.getElementById('consecutivo').value,
         tomo: document.getElementById('tomo').value,
-        novio: document.getElementById('novio').value,
-        novia: document.getElementById('novia').value,
+        caballero: document.getElementById('caballero').value,
+        dama: document.getElementById('dama').value,
         expediente: document.getElementById('expediente').value,
         folio: document.getElementById('folio').value,
         anio: document.getElementById('anio').value,
-        apellido: document.getElementById('apellido').value,
+        operador: document.getElementById('operador').value,
         fecha: document.getElementById('fecha').value,
     };
 
@@ -168,7 +187,7 @@ ipcRenderer.on('registro-creado', (event, result) => {
 });
 
 function actualizarVisibilidadPaginacion() {
-    const tableBody = document.getElementById('usuarios-body');
+    const tableBody = document.getElementById('matrimonios-body');
     const pagination = document.querySelector('.pagination');
 
     // Capturar el número de filas en la tabla
@@ -192,7 +211,7 @@ function limpiarData() {
     pagination.style.display = 'none';
 
     // Limpiar el cuerpo de la tabla
-    const tableBody = document.getElementById('usuarios-body');
+    const tableBody = document.getElementById('matrimonios-body');
     tableBody.innerHTML = ''; // Limpiar contenido dinámico
 }
 
@@ -205,7 +224,7 @@ window.onload = () => {
     document.getElementById('limpiar-filtros').addEventListener('click', limpiaFiltro);
     document.getElementById('limpiar-data').addEventListener('click', limpiarData); // Agregar evento al botón
     // Ocultar la tabla inicialmente
-    document.getElementById('usuarios-table').style.display = 'none';
+    document.getElementById('matrimonios-table').style.display = 'none';
     
     // Crear el elemento para mostrar el mensaje cuando no hay datos
     const noDataMessage = document.createElement('div');
@@ -228,14 +247,14 @@ window.onload = () => {
 
 function limpiaFiltro() {
     // Limpiar los inputs de los filtros
-    document.getElementById('filter-libro').value = '';
+    document.getElementById('filter-consecutivo').value = '';
     document.getElementById('filter-tomo').value = '';
-    document.getElementById('filter-novio').value = '';
-    document.getElementById('filter-novia').value = '';
+    document.getElementById('filter-caballero').value = '';
+    document.getElementById('filter-dama').value = '';
     document.getElementById('filter-expediente').value = '';
     document.getElementById('filter-folio').value = '';
     document.getElementById('filter-anio').value = '';
-    document.getElementById('filter-apellido').value = '';
+    document.getElementById('filter-operador').value = '';
     document.getElementById('filter-fecha').value = '';
 
     // Limpiar los filtros y mostrar todos los datos

@@ -49,6 +49,8 @@ header {
     text-align: center;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 20px 20px 20px rgba(3, 95, 145, 0.509);
+    margin-bottom: 5px;
+    margin: 20px 10px;
 }
 
 h1 {
@@ -96,6 +98,9 @@ div.logo-header img{
 
 }
 
+/* Formulario de Login en bienvenida*/
+
+
 /* //! agregar al FORM DE INSERTA Secciones principales 
 .form-section, .data-section {
     background-color: #ffffff;
@@ -110,6 +115,17 @@ div.logo-header img{
     width:98%;
 }
 */
+
+section.section-data{
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    margin: 20px 10px;
+}
+
+
 
 /* Formulario */
 .form-group {
@@ -151,6 +167,7 @@ input[type="date"]:focus {
     font-weight: 500;
     transition: background-color 0.3s;
     color: #192637;
+    background-color: #2b3c7bcf;
 }
 
 .container-bt{
@@ -178,35 +195,113 @@ input[type="date"]:focus {
     background-color: #1557b0;
 }
 
-.btn-secondary {
-    background-color: #f1f3f4;
-    color: #1a73e8;
+button.btn.btn-secondary {
+    background-color: #acb0b2;
+    color: #ffffff;
 }
 
-.btn-secondary:hover {
-    background-color: #e8eaed;
+button.btn-secondary:hover {
+    background-color: #60799edf;
 }
+
 
 /* Acciones y filtros */
 .filters input {
     flex: 1;
     min-width: 150px;
+    padding: 10px; /* Espaciado interno para los inputs */
+    border: 1px solid #ccc; /* Borde por defecto */
+    border-radius: 4px; /* Bordes redondeados */
+    transition: border-color 0.3s ease; /* Transición para el borde */
 }
 
-.actions,
+.filters input:focus {
+    border-color: #007bff; /* Cambia el color del borde al enfocar */
+}
+
 .filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
-.actions > *,
-.filters > * {
-  flex-shrink: 0;
+/* Estilos para las etiquetas */
+.filters .filter {
+    position: relative; /* Necesario para posicionar las etiquetas */
+    flex-basis: calc(33.333% - 10px); /* Tres elementos por fila, restando el espacio */
 }
+
+.filters label {
+    position: absolute;
+    left: 10px; /* Posición horizontal de la etiqueta */
+    top: 10px; /* Posición vertical de la etiqueta */
+    color: #007bff; /* Color celeste */
+    font-size: 12px; /* Tamaño de fuente pequeño */
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave */
+    background-color: white;
+    margin: 3px;
+    padding: 2px;
+}
+
+.filters input:not(:placeholder-shown) + label,
+.filters input:focus + label {
+    opacity: 1; /* Muestra la etiqueta al escribir o enfocar */
+    transform: translateY(-20px); /* Mueve la etiqueta hacia arriba */
+}
+
+.filter {
+    flex: 1; /* Cada filtro ocupa el mismo espacio */
+}
+
+#limpiar-filtros{
+    width: 97%;
+    margin-top: -1px;
+}
+
+
+.button-container {
+    display: flex; /* Habilita Flexbox */
+    justify-content: center;
+}
+
+
+button#aplicar-filtros{
+    width: 60%;
+    justify-content: center;
+    margin: 5px auto;
+    height: 60px;
+    background-color: #1b2753eb;
+} 
+
+#aplicar-filtros:hover{
+    background-color: #2b3c7bcf;
+}
+
+.btn {
+    padding: 5x 5px; /* Espaciado interno para los botones */
+    background-color: #0b1644ee;
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    margin-right: 5px; /* Espacio entre los botones (opcional) */
+    width: 40%;
+    font-weight: 800;
+}
+
+
+.btn:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último botón */
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
+
 
 
 /* Tabla */
@@ -431,14 +526,14 @@ tr:hover {
 
 
 /* Agregar estilos para login - en bienvenida */
-div.login-card{
-    padding: 5px;
+div.login-card.container{
+    padding: 10px;
     width: 60%; /* Aumentar el ancho del contenedor */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    background-color: rgba(229, 233, 241, 0.58);
+    background-color: #f7f8f9;
     border-radius: 8px;
     text-align: center;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 input#username,
@@ -485,6 +580,15 @@ button {
     align-items: center;     /* Centra verticalmente */
     margin: 0 auto;
     width: 55%;
+
+}
+
+
+button.btn-send{
+    background-color: #7b8199cf;
+}
+button.btn-send:hover {
+    background-color: #1a73e7;
 }
 
 button:hover {
@@ -525,4 +629,59 @@ p.text-gray{
 
 .navBar a:hover {
     color: #3981df; /* Cambia el color al pasar el mouse */
+}
+
+
+
+/* Estilos para las etiquetas */
+.filter {
+    position: relative; /* Necesario para posicionar las etiquetas */
+    margin-bottom: 20px; /* Espacio entre los campos */
+}
+
+.filter label {
+    position: absolute;
+    left:25%; /* Posición horizontal de la etiqueta */
+    top: 10px; /* Posición vertical de la etiqueta */
+    color: #007bff; /* Color celeste */
+    font-size: 12px; /* Tamaño de fuente pequeño */
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transición suave */
+    background-color: white; /* Fondo blanco para la etiqueta */
+    margin: 3px; /* Espacio alrededor de la etiqueta */
+    padding: 2px; /* Espaciado interno de la etiqueta */
+    border-radius: 10px;
+}
+
+input:not(:placeholder-shown) + label,
+input:focus + label {
+    opacity: 1; /* Muestra la etiqueta al escribir o enfocar */
+    transform: translateY(-20px); /* Mueve la etiqueta hacia arriba */
+}
+
+div.options button img{
+    margin: 0 auto;
+    width: 80%;
+}
+div.options button{
+    background: rgb(250,250,250);
+background: radial-gradient(circle, rgba(250,250,250,1) 23%, rgb(3, 11, 72) 86%);
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en múltiples filas */
+    justify-content: space-around; /* Espacio entre los elementos */
+    gap: 10px; /* Espacio entre los elementos */
+}
+
+.flex-item {
+    flex: 0 0 calc(33.333% - 20px); /* 3 elementos por fila */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+    text-align: center; /* Centra el contenido dentro de cada item */
+}
+
+.logo img {
+    max-width: 100%; /* Asegura que las imágenes no salgan de su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
 }

@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    
     <div class="container-home">
         <header>
             <div class="w-full text-center">
@@ -30,7 +31,7 @@
                     <p class="info-paragraph">
                         Bienvenido al Sistema de Archivo del Concejo Municipal de Maracaibo. Inicia sesión y según los privilegios de tu rol, podrás:                         
                         <ul>
-                            <li>✅ Consultar los registros de Matrimonios, Cementerio, Laboral y Actas de Sesiones del Concejo, Decretos, Construcciones, Ejidos.</li>
+                            <li>✅ Consultar los registros de <b>Matrimonios, Cementerios, Laboral, Actas de Sesiones del Concejo, Decretos, Construcciones y Ejidos.</b></li>
                             <li>✅ Realizar búsquedas filtradas de registros.</li>
                             <li>✅ Realizar actualización y eliminación de registros.</li>
                         </ul>
@@ -39,21 +40,31 @@
                 </div>
                 
                 <h2>INICIA SESIÓN.</h2>
-                    <div class="login-card container">
-                        <form id="login-form">
+                <div class="login-card container">
+                    <form id="login-form">
+                        <div class="filter">
                             <label for="username">Usuario:</label>
-                            <input type="text" id="username" placeholder="admin" required>
-                    
+                            <input type="text" id="username" placeholder="Usuario" required 
+                                   onfocus="this.placeholder=''" 
+                                   onblur="this.placeholder='usuario'">
+                            <label for="username">admin</label> <!-- Label que aparecerá al escribir -->
+                        </div>
+                
+                        <div class="filter">
                             <label for="password">Clave:</label>
-                            <input type="password" id="password" placeholder="123456" required>
-                                
-                            <div class="btn-send">
-                                <button type="submit">ENVIAR</button>
-                            </div>
-                    
-                            <p id="error-message" class="error">Usuario o clave incorrecta</p>
-                        </form>
-                    </div>
+                            <input type="password" id="password" placeholder="Contrasena" required 
+                                   onfocus="this.placeholder=''" 
+                                   onblur="this.placeholder='contrasena'">
+                            <label for="password">123456</label> <!-- Label que aparecerá al escribir -->
+                        </div>
+                
+                        <div class="btn-send">
+                            <button type="submit">ENVIAR</button>
+                        </div>
+                
+                        <p id="error-message" class="error">Usuario o clave incorrecta</p>
+                    </form>
+                </div>
          
                 <div class="info-container">
                         <p class="info-paragraph text-gray">

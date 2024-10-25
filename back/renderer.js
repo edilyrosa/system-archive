@@ -127,13 +127,13 @@ function aplicarFiltros() {
 function enviarFormulario(event) {
     event.preventDefault();
     const formData = {
-        consecutivo: document.getElementById('consecutivo').value,
-        tomo: document.getElementById('tomo').value,
+        // consecutivo: document.getElementById('consecutivo').value,
+        tomo: Number(document.getElementById('tomo').value),
         caballero: document.getElementById('caballero').value,
         dama: document.getElementById('dama').value,
         expediente: document.getElementById('expediente').value,
-        folio: document.getElementById('folio').value,
-        anio: document.getElementById('anio').value,
+        folio: Number(document.getElementById('folio').value),
+        anio: Number(document.getElementById('anio').value),
         operador: document.getElementById('operador').value,
         fecha: document.getElementById('fecha').value,
     };
@@ -262,19 +262,20 @@ function limpiaFiltro() {
 }
 
 
-// Nueva función para alternar la visibilidad del formulario
-function toggleForm() {
-    const formSection = document.getElementById('form-section');
-    const toggleButton = document.getElementById('toggle-form'); // Obtener el botón
+//! Nueva función para alternar la visibilidad del formulario
+// function toggleForm() {
+//     const formSection = document.getElementById('form-section');
+//     const toggleButton = document.getElementById('toggle-form'); // Obtener el botón
 
-    if (formSection.style.display === 'none') {
-        formSection.style.display = 'block'; // Muestra el formulario
-        toggleButton.innerText = 'Descartar Nueva Insercion de Registro'; // Cambiar el texto del botón
-    } else {
-        formSection.style.display = 'none'; // Oculta el formulario
-        toggleButton.innerText = 'Insertar Registro'; // Cambiar el texto del botón
-    }
-}
+//     if (formSection.style.display === 'none') {
+//         formSection.style.display = 'block'; // Muestra el formulario
+//         toggleButton.innerText = 'Descartar Nueva Insercion de Registro'; // Cambiar el texto del botón
+//     } else {
+//         formSection.style.display = 'none'; // Oculta el formulario
+//         toggleButton.innerText = 'Insertar Registro'; // Cambiar el texto del botón
+//     }
+// }
+
 // Conectar la función al botón
 document.getElementById('toggle-form').addEventListener('click', toggleForm);
 

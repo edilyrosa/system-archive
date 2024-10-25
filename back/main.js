@@ -116,11 +116,15 @@ ipcMain.on('cargar-pagina-maria', (event, page, filters = null) => {
 
 ipcMain.on('crear-registro', (event, data) => {
     console.log('Evento crear-registro recibido:', data); // Para depuración
-    const { consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha } = data;
-    const params = [consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha];
+    //! const { consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha } = data;
+    const {expediente, caballero, dama, tomo, folio, anio, operador, fecha } = data;
+    //! const params = [consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha];
+    const params = [expediente, caballero, dama, tomo, folio, anio, operador, fecha];
     //TODO: Validar formulario. (consecutivo int, expediente int, caballero string, dama string, fecha data, operador session.operador == username)
-    if (consecutivo && expediente && caballero && dama && tomo && folio && anio && operador && fecha) {
-        const query = `INSERT INTO matrimonios (consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    // if (consecutivo && expediente && caballero && dama && tomo && folio && anio && operador && fecha) {
+    if (expediente && caballero && dama && tomo && folio && anio && operador && fecha) {
+        //! const query = `INSERT INTO matrimonios (consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        const query = `INSERT INTO matrimonios  (expediente, caballero, dama, tomo, folio, anio, operador, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
         db.execute(query, params, (err, result, fields) => {
             if (err) {
                 console.error("Error al crear registro:", err.message);

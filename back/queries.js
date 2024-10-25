@@ -43,7 +43,8 @@ function crearRegistro(db, data, callback) {
     const { consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha } = data;
 
     if (consecutivo && expediente && caballero && dama && tomo && folio && anio && operador && fecha) {
-        const query = `INSERT INTO matrimonios (consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        // const query = `INSERT INTO matrimonios (consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        const query = `INSERT INTO matrimonios (expediente, caballero, dama, tomo, folio, anio, operador, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
         db.run(query, [consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha], function (err) {
             if (err) {
                 callback(err, null);

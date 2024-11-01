@@ -114,9 +114,9 @@ section.section-data{
 
 
 /* Formulario */
-.form-group {
+/* .form-group {
     margin-bottom: 15px;
-}
+} */
 
 label {
     display: block;
@@ -129,7 +129,7 @@ input[type="text"],
 input[type="password"],
 input[type="date"] {
     width: 97%;
-    padding: 10px;
+    padding: 2px;
     border: 1px solid #dadce0;
     border-radius: 4px;
     font-size: 14px;
@@ -144,6 +144,23 @@ input[type="date"]:focus {
 }
 
 /* Botones */
+.btn-action{
+    background-color: #a9abafcf;
+    color: white;
+    font-size: 14px;
+    font-weight: 800;
+    width: 100%;
+    text-align: center;
+    margin: 2px auto;
+    padding: 2px;
+    justify-content: center;
+    display: flex;
+}
+
+.btn-action:hover{
+    background-color: #7b8fb6;
+}
+
 .btn {
     padding: 10px 20px;
     border: none;
@@ -194,8 +211,8 @@ button.btn-secondary:hover {
 /* Acciones y filtros */
 .filters input {
     flex: 1;
-    min-width: 150px;
-    padding: 10px; /* Espaciado interno para los inputs */
+    width: 100%;
+    padding: 2px; /* Espaciado interno para los inputs */
     border: 1px solid #ccc; /* Borde por defecto */
     border-radius: 4px; /* Bordes redondeados */
     transition: border-color 0.3s ease; /* Transición para el borde */
@@ -241,6 +258,7 @@ button.btn-secondary:hover {
 
 .filter {
     flex: 1; /* Cada filtro ocupa el mismo espacio */
+    width: 100%;
 }
 
 #limpiar-filtros{
@@ -300,11 +318,12 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+td {
     border-bottom: 1px solid #e0e0e0;
     font-size: 12px;
     text-align: center;
-    padding: 12px;
+    padding: 2px;
+    margin: 2px;
 }
 
 header{
@@ -317,7 +336,7 @@ header{
 }
 
 th {
-    padding: 12px;
+    padding: 2px;
     background-color:#1e324c;;
     color: #ffffff;
     font-weight: 800;
@@ -346,7 +365,7 @@ tr:hover {
 
 /* Estilos para botones de acción en la tabla */
 .button-table {
-    padding: 5px 10px;
+    padding: 2px;
     margin: 2px;
     font-size: 12px;
     background-color: #f1f3f4;
@@ -375,12 +394,20 @@ tr:hover {
 
 /* cajas flexes*/
 
+div.flex-container{
+    margin: 1px;
+}
+
+.flex-container > button{
+    width: 100%;
+}
+
 .flex-container {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
     width: 100%; /* Ancho total del contenedor */
-    padding: 5px;
-    margin: 5px;
+    padding: 2px;
+    margin: 2px;
     justify-content: center;
     align-items: center;
     justify-content: center; /* Centra horizontalmente */
@@ -389,9 +416,9 @@ tr:hover {
 
 .flex-item-2 { 
     flex: 1; /* Cada elemento ocupa el mismo espacio disponible */
-    padding: 10px; /* Espaciado interno */
+    padding: 2px; /* Espaciado interno */
     min-width: 0; /* Previene el desbordamiento */
-    margin: 5px auto;
+    margin: 0 auto;
     text-align: center;
 }
 
@@ -407,9 +434,6 @@ tr:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .form-group {
-        margin-bottom: 10px;
-    }
 
     .actions, .filters {
         flex-direction: column;
@@ -417,11 +441,6 @@ tr:hover {
 
     .btn, .filters input {
         width: 100%;
-    }
-
-    th, td {
-        padding: 8px;
-        font-size: 14px;
     }
 
     .button-table {
@@ -622,7 +641,7 @@ p.text-gray{
 /* Estilos para las etiquetas */
 .filter {
     position: relative; /* Necesario para posicionar las etiquetas */
-    margin-bottom: 20px; /* Espacio entre los campos */
+    margin-bottom: 2px; /* Espacio entre los campos */
 }
 
 .filter label {
@@ -670,7 +689,7 @@ background: radial-gradient(circle, rgba(250,250,250,1) 23%, rgb(3, 11, 72) 86%)
 
 .flex-item-2 { 
     flex: 1; /* Cada elemento ocupa el mismo espacio disponible */
-    padding: 10px; /* Espaciado interno */
+    padding: 2px; /* Espaciado interno */
     min-width: 0; /* Previene el desbordamiento */
     margin: 5px auto;
     text-align: center;
@@ -684,30 +703,36 @@ background: radial-gradient(circle, rgba(250,250,250,1) 23%, rgb(3, 11, 72) 86%)
 }
 
 
+#span-total{
+    text-align: center;
+    font-size: 30px ;
+    font-weight: 700;
+    color: #192637;
+    margin: 10px auto;
 
+}
 
 
 
 
 /* //! agregar al FORM DE INSERTA Secciones principales */
-.form-section {
+/* .form-section {
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 5px;
     margin: 5px auto;
-}
+} */
 
-.form-section input {
+/* .form-section input {
     width:98%;
-}
+} */
 
 .flex-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 20px;
 }
 
 .form-group {
@@ -777,4 +802,101 @@ small {
     font-size: 12px;
     color: #999;
     margin-top: 5px;
+}
+
+
+.container-table-form {
+    display: flex; /* Usar flexbox para alinear elementos */
+}
+
+
+
+.table-container {
+    width: 100%; /* Ocupa el 100% del ancho por defecto */
+}
+
+/* Cuando la sección de formulario es visible */
+.form-section.active {
+    display: flex; /* Mostrar la sección */
+    flex-direction: column;
+}
+
+section#form-section.form-section {
+    margin: 10px;
+
+    margin-right: 20px;
+
+}
+
+/* Cuando la sección de formulario está oculta */
+.form-section.hidden {
+    display: none; /* Mantener oculta */
+}
+
+.table-container.full-width {
+    width: 100%; /* La tabla ocupa el 100% del ancho cuando el formulario está oculto */
+    
+}
+
+
+
+.form-section {
+    display: none; /* Ocultar por defecto */
+    width: 50%; /* Ocupa el 50% del ancho cuando es visible */
+    background-color: #f9f9f9; /* Color de fondo suave */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px; /* Espaciado interno */
+    max-width: 400px; /* Ancho máximo de la tarjeta */
+    margin: auto; /* Centrar la tarjeta horizontalmente */
+}
+
+input .form-section{
+    width: 100%;
+}
+
+h3 {
+    text-align: center; /* Centrar el título */
+    color: #333; /* Color del texto del título */
+}
+
+.form-group {
+    margin-bottom: 2px; /* Espacio entre los grupos de formulario */
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 12px); /* Ancho completo menos el padding */
+    padding: 5px; /* Padding interno de los inputs */
+    margin: 5px 0; /* Margen superior e inferior */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados para los inputs */
+    font-size: 16px; /* Tamaño de fuente para los inputs */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #007bff; /* Color del borde al enfocar */
+    outline: none; /* Quitar el contorno por defecto */
+}
+
+button {
+    width: calc(100% - 12px); /* Ancho completo menos el padding */
+    padding: 10px; /* Padding interno para los botones */
+    margin: 5px 0; /* Margen superior e inferior para los botones */
+    border: none; /* Sin borde por defecto */
+    border-radius: 4px; /* Bordes redondeados para los botones */
+    background-color: #007bff; /* Color de fondo azul para los botones */
+    color: white; /* Color del texto en blanco */
+    font-size: 16px; /* Tamaño de fuente para los botones */
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+}
+
+button:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el mouse sobre el botón */
+}
+
+small {
+    display: block; /* Hacer que el texto pequeño esté en una nueva línea */
+    color: #666; /* Color gris para el texto pequeño */
 }

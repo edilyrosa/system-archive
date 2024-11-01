@@ -3,7 +3,6 @@ const mysql = require('mysql2');
 
 let db;
 
-
 //TODO: Make this export secured by using the environment variable
 let databaseConfig = {
   HOST: "localhost",
@@ -32,8 +31,6 @@ function conectarBD  () {
     return db;
   };
 
-
-  
 
 function cerrarBD() {
   db.close((err) => {

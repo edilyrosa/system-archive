@@ -1,13 +1,45 @@
 const { ipcRenderer } = require('electron');
 
 let currentPage = 0;
-const pageSize = 1000;
+const pageSize = 10;
+//const pageSize = 1000;
 let filters = null;
+let consecutivoUpdate;
+let fechaUpdate = new Date().toLocaleDateString('es-ES', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  })
 
+let operadorUpdate = 'userSession'
+
+let fechaRow;
+
+function cargarDatosEnFormulario(row) {
+    document.getElementById('expediente').value = row.expediente;
+    document.getElementById('caballero').value = row.caballero;
+    document.getElementById('dama').value = row.dama;
+    document.getElementById('tomo').value = row.tomo;
+    document.getElementById('folio').value = row.folio;
+    document.getElementById('anio').value = row.anio;
+    //document.getElementById('modo').value = 'actualizar'; // Cambiar a modo actualizar
+    consecutivoUpdate = row.consecutivo;
+    fechaRow = row.fecha;
+    console.log( fechaUpdate);
+    
+    //!fechaUpdate = row.fecha;
+    //!operadorUpdate = row.operador; 
+
+    // Guardar el ID del registro para actualizarlo después
+    document.getElementById('formulario').dataset.registroId = row.consecutivo;
+}
+
+//al evento clic sobre "actualizar"
 function actualizarTabla(rows, offset) {
     const tbody = document.getElementById('matrimonios-body');
     const table = document.getElementById('matrimonios-table');
     const noDataMessage = document.getElementById('no-data-message');
+    const formSection = document.getElementById('form-section'); // 
 
     if (rows.length === 0) {
         table.style.display = 'none'; 
@@ -29,16 +61,28 @@ function actualizarTabla(rows, offset) {
                 <td>${row.tomo}</td>
                 <td>${row.folio}</td>
                 <td>${row.anio}</td>
-                <td>${row.operador}</td>
-                <td>${row.fecha.toLocaleDateString('es-ES', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric'
-                  })}</td>
-                <td><button class='button-table'>Actualizar</button> <button class='button-table'>Eliminar</button></td>
+                 <td>
+                    <button class='button-update btn-action' data-id='${row.consecutivo}'>Actualizar</button> 
+                    <button class='button-delete btn-action' data-id='${row.consecutivo}'>Eliminar</button>
+                </td>
             `;
             tbody.appendChild(tr);
+        
+
+        // Evento para actualizar el registro
+        tr.querySelector('.button-update').addEventListener('click', () => {
+            document.getElementById('modo').value = 'actualizar'; 
+            document.getElementById('h3-title-form').textContent = 'Actualizando Registro';
+            cargarDatosEnFormulario(row);
+            formSection.style.display = 'block';
+            
         });
+
+        // Evento para eliminar el registro
+        tr.querySelector('.button-delete').addEventListener('click', () => {
+            eliminarRegistro(row.consecutivo);
+        });
+    });
 
         document.getElementById('prev-page').disabled = currentPage === 0;
         document.getElementById('page-number').textContent = `Página ${currentPage + 1}`;
@@ -46,10 +90,24 @@ function actualizarTabla(rows, offset) {
     }
 }
 
+
 ipcRenderer.on('actualizar-registros', (event, rows, offset) => {
     actualizarTabla(rows, offset);
     actualizarVisibilidadPaginacion(); // Mover esta línea aquí para asegurar que se llame después de actualizar la tabla
+    document.getElementById('modo').value = 'crear'; //! Cambiar a modo crear
 });
+
+ipcRenderer.on('actualizar-total-registros', (event,total) => {
+    actualizarTotalRegistros(total);
+    // actualizarTabla(rows, offset);
+    // actualizarVisibilidadPaginacion(); // Mover esta línea aquí para asegurar que se llame después de actualizar la tabla
+});
+
+function actualizarTotalRegistros(total) {
+    document.getElementById('span-total').textContent = `Total de Registros encontrados: ${total}`;
+
+}
+
 
 function changePage(direction) {
     if (direction === 'next') {
@@ -76,20 +134,20 @@ function mostrarData() {
     actualizarVisibilidadPaginacion();
 }
 
-function mostrarDataMaria() {
-    filters = null;
-     currentPage = 0;
-     ipcRenderer.send('cargar-pagina-mariadb', currentPage, filters);
+// function mostrarDataMaria() {
+//     filters = null;
+//      currentPage = 0;
+//      ipcRenderer.send('cargar-pagina-mariadb', currentPage, filters);
  
-     // Mostrar la tabla y la paginación
-     const tableContainer = document.querySelector('.table-container');
-     const pagination = document.querySelector('.pagination');
-     tableContainer.style.display = 'block'; // Asegurarse de que la tabla sea visible
-     pagination.style.display = 'flex'; // Asegurarse de que la paginación sea visible
+//      // Mostrar la tabla y la paginación
+//      const tableContainer = document.querySelector('.table-container');
+//      const pagination = document.querySelector('.pagination');
+//      tableContainer.style.display = 'block'; // Asegurarse de que la tabla sea visible
+//      pagination.style.display = 'flex'; // Asegurarse de que la paginación sea visible
  
-     // Actualizar la visibilidad de la paginación
-     actualizarVisibilidadPaginacion();
- }
+//      // Actualizar la visibilidad de la paginación
+//      actualizarVisibilidadPaginacion();
+//  }
  
 function aplicarFiltros() {
     filters = {
@@ -124,22 +182,74 @@ function aplicarFiltros() {
     actualizarVisibilidadPaginacion();
 }
 
+
+
+// function enviarFormulario(event) {
+//     event.preventDefault();
+//     const formData = {
+//         // consecutivo: es un autoincrement que la db
+//         tomo: Number(document.getElementById('tomo').value),
+//         caballero: document.getElementById('caballero').value,
+//         dama: document.getElementById('dama').value,
+//         expediente: document.getElementById('expediente').value,
+//         folio: Number(document.getElementById('folio').value),
+//         anio: Number(document.getElementById('anio').value),
+//         // operador: sera tomado de session.operador == userName
+//         // fecha: dera un Date.now() formato dd/mm/yyyy
+//     };
+
+//     ipcRenderer.send('crear-registro', formData);
+// }
+
+
+
+function limpiaVarModoFormulario() {
+    document.getElementById('modo').value = 'crear'; // Cambiar a modo actualizar
+    document.getElementById('h3-title-form').textContent = 'Creando Registro';
+}
+
 function enviarFormulario(event) {
+    
     event.preventDefault();
+    const modo = document.getElementById('modo').value; // Obtener el modo del formulario
     const formData = {
-        // consecutivo: document.getElementById('consecutivo').value,
+        consecutivo: consecutivoUpdate ? consecutivoUpdate : null,
         tomo: Number(document.getElementById('tomo').value),
         caballero: document.getElementById('caballero').value,
         dama: document.getElementById('dama').value,
         expediente: document.getElementById('expediente').value,
         folio: Number(document.getElementById('folio').value),
         anio: Number(document.getElementById('anio').value),
-        operador: document.getElementById('operador').value,
-        fecha: document.getElementById('fecha').value,
+        fecha: fechaRow,
+        operador: operadorUpdate
+        // fecha: dera un Date.now() formato dd/mm/yyyy
+        // consecutivo: es un autoincrement que la db
+        // operador: sera tomado de session.operador == userName.
     };
 
-    ipcRenderer.send('crear-registro', formData);
+    if (modo === 'actualizar') {
+        
+        ipcRenderer.send('actualizar-registro', formData);
+        
+    } else {
+        // Enviar el formulario al backend para crear un nuevo registro
+        ipcRenderer.send('crear-registro',formData);
+
+    }
+
+
+
 }
+
+// Función para formatear la fecha a dd/mm/yyyy
+function formatDate(timestamp) {
+    const date = new Date(timestamp);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Los meses son 0-indexados
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
 
 function showModal(message) {
     const modal = document.createElement('div');
@@ -173,6 +283,7 @@ function showModal(message) {
     document.body.appendChild(modal);
 }
 
+
 ipcRenderer.on('registro-creado', (event, result) => {
     if (result.success) {
         console.log(`Nuevo registro creado con ID: ${result.id}`);
@@ -186,6 +297,30 @@ ipcRenderer.on('registro-creado', (event, result) => {
     }
 });
 
+ipcRenderer.on('registro-actualizado', (event, result) => {
+    if (result.success) {
+        console.log(`Registro actualizado con ID: ${result.id}`);
+        showModal('El registro se actualizó correctamente.');
+        // Aquí puedes llamar a una función para refrescar la tabla de registros
+        mostrarData(); // Asegúrate de que esta función esté definida y actualice la vista.
+            // Limpiar el formulario después de una inserción exitosa
+            document.getElementById('formulario').reset();
+            
+    } else {
+        console.error(`Error al actualizar registro en renderer 1: ${result.error}`);
+        showModal(`Error al actualizar registro  en renderer 2: ${result.error}`);
+    }
+});
+
+
+
+
+
+
+
+
+
+
 function actualizarVisibilidadPaginacion() {
     const tableBody = document.getElementById('matrimonios-body');
     const pagination = document.querySelector('.pagination');
@@ -195,7 +330,8 @@ function actualizarVisibilidadPaginacion() {
     console.log('Número de filas en la tabla:', rowCount);
 
     // Aplicar lógica de paginación
-    if (rowCount >= 1000) {
+   // if (rowCount >= 1000) {
+    if (rowCount >= 10) {
         pagination.style.display = 'flex'; // Mostrar paginación
     } else {
         pagination.style.display = 'none'; // Ocultar paginación
@@ -216,6 +352,10 @@ function limpiarData() {
 }
 
 window.onload = () => {
+    document.getElementById('btn-reset-form').addEventListener('click', limpiaVarModoFormulario);
+
+
+
     document.getElementById('mostrar-data').addEventListener('click', mostrarData);
     document.getElementById('aplicar-filtros').addEventListener('click', aplicarFiltros);
     document.getElementById('formulario').addEventListener('submit', enviarFormulario);
@@ -243,8 +383,6 @@ window.onload = () => {
 };
 
 
-
-
 function limpiaFiltro() {
     // Limpiar los inputs de los filtros
     document.getElementById('filter-consecutivo').value = '';
@@ -260,21 +398,6 @@ function limpiaFiltro() {
     // Limpiar los filtros y mostrar todos los datos
     //aplicarFiltros();
 }
-
-
-//! Nueva función para alternar la visibilidad del formulario
-// function toggleForm() {
-//     const formSection = document.getElementById('form-section');
-//     const toggleButton = document.getElementById('toggle-form'); // Obtener el botón
-
-//     if (formSection.style.display === 'none') {
-//         formSection.style.display = 'block'; // Muestra el formulario
-//         toggleButton.innerText = 'Descartar Nueva Insercion de Registro'; // Cambiar el texto del botón
-//     } else {
-//         formSection.style.display = 'none'; // Oculta el formulario
-//         toggleButton.innerText = 'Insertar Registro'; // Cambiar el texto del botón
-//     }
-// }
 
 // Conectar la función al botón
 document.getElementById('toggle-form').addEventListener('click', toggleForm);

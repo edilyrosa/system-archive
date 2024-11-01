@@ -6,7 +6,7 @@ document.getElementById('login-form').addEventListener('submit', function (event
     const password = document.getElementById('password').value;
 
     // Verifica las credenciales
-    if (username === 'admin' && password === '123456') {
+    if (username === 'a' && password === '1') {
        // window.location.href = 'admin.html'; //! Redirige a admin.html
         window.location.href = 'menuArchivos.html'; // Redirige a admin.html
     } else {

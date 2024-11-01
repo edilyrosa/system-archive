@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sistema de Registros - Buscar Registro de Matrimonios</title>
+        <title>Sistema de Registros - Buscar - Actulizar - Eliminar Registro de Matrimonios</title>
         <link rel="stylesheet" href="../style.css">
         <link href="../../public/style.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
@@ -21,7 +21,7 @@
                     <nav class="flex justify-between">
                         <a href="../index.html" class="flex-1 text-white text-center hover:text-gray-300">Bienvenida 🏠</a>
                         <a href="../menuArchivos.html" class="flex-1 text-white text-center hover:text-gray-300">Menu de archivos 🗃️</a>
-                        <a href="buscar.html" class="flex-1 text-white text-center hover:text-gray-300" style="text-decoration: underline;">Buscar Registro🔎</a>
+                        <a href="buscar.html" class="flex-1 text-white text-center hover:text-gray-300" style="text-decoration: underline;">CRUD Registro🔎</a>
                         <a href="insertar.html" class="flex-1 text-white text-center hover:text-gray-300">Insertar Registro 📂</a>
                         <a href="../index.html" class="flex-1 text-white text-center hover:text-gray-300">Soporte Técnico 👨🏽‍💻</a>
                         <a href="../index.html" class="flex-1 text-white text-center hover:text-gray-300">Cerrar Sesión 🔐</a>
@@ -31,9 +31,7 @@
 
             <main>
 
-                <!-- //! DEBO ELIMINARLO -->
-                <form id="formulario"></form>
-
+    
                 
                 <section class="section-data">
                     
@@ -105,37 +103,96 @@
                     <div class="button-container action">
                         <button id="aplicar-filtros" class="btn btn-secondary">APLICAR FLITROS</button>
                      </div>
-
                      
                     <div class="button-container actions">
                         <button id="mostrar-data" class="btn btn-secondary">Mostrar toda la data cada 1000 Registros</button>
                         <button id="limpiar-data" class="btn btn-secondary">Limpiar la tabla de Registros</button> 
                     </div>
 
+                    <div>
+                        <p id="span-total"></p>
+                    </div>
+                    
+                    <div class="container-table-form">
 
+                        <section class="form-section" id="form-section" style="display: none;">
+                            <h3 id="h3-title-form">INSERTAR REGISTROS DE MATRIMONIO</h3>
+                            
+                            <form id="formulario">
+                        
+                                <div class="flex-container">
+                                    <div class="form-group flex-item-2 filter">
+                                        <input type="text" id="expediente" placeholder="Expediente" required onfocus="this.placeholder=''" onblur="this.placeholder='Expediente'">
+                                        <label for="expediente">Expediente</label>
+                                        <small>Se espera un texto</small>
+                                    </div>
+                        
+                                    <div class="form-group flex-item-2 filter">
+                                        <input type="text" id="caballero" placeholder="Caballero" required onfocus="this.placeholder=''" onblur="this.placeholder='Caballero'">
+                                        <label for="caballero">Caballero</label>
+                                        <small>Se espera un texto</small>
+                                    </div>
+                                </div>
+                        
+                                <div class="flex-container">
+                                    <div class="form-group flex-item-2 filter">
+                                        <input type="text" id="dama" placeholder="Dama" required onfocus="this.placeholder=''" onblur="this.placeholder='Dama'">
+                                        <label for="dama">Dama</label>
+                                        <small>Se espera un texto</small>
+                                    </div>
+                        
+                                    <div class="form-group flex-item-2 filter">
+                                        <input type="number" id="tomo" placeholder="Tomo" required onfocus="this.placeholder=''" onblur="this.placeholder='Tomo'">
+                                        <label for="tomo">Tomo</label>
+                                        <small>Se espera un número</small>
+                                    </div>
+                                </div>
+                        
+                                <div class="flex-container">
+                                    <div class="form-group flex-item-2 filter">
+                                        <input type="number" id="folio" placeholder="Folio" required onfocus="this.placeholder=''" onblur="this.placeholder='Folio'">
+                                        <label for="folio">Folio</label>
+                                        <small>Se espera un número</small>
+                                    </div>
+                        
+                                    <div class="form-group flex-item-2 filter">
+                                        <input type="number" id="anio" placeholder="Año" required onfocus="this.placeholder=''" onblur="this.placeholder='Año'">
+                                        <label for="anio">Año</label>
+                                        <small>Se espera un número</small>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="modo" value="crear"> <!-- Este campo controla si es crear o actualizar -->
+        
+                                <div class="flex-container">
+                                    <button type="reset" id="btn-reset-form" class="btn">Limpiar</button>
+                                    <button type="submit" class="btn">Enviar</button>
+                                </div>
+                            </form>
+                        </section>
 
-                    <div class="table-container">
-                        <table id="matrimonios-table">
-                            <h2>CRUD del Sistema de Archivos de Matrimonios</h2>
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>CONSECUTIVO</th>
-                                    <th>EXPEDIENTE</th>
-                                    <th>ESPOSO</th>
-                                    <th>ESPOSA</th>
-                                    <th>TOMO</th>
-                                    <th>FOLIO</th>
-                                    <th>AÑO</th>
-                                    <th>OPERADOR</th>
-                                    <th>FECHA DE REGISTRO</th>
-                                    <th>ACCIONES</th>
-                                </tr>
-                            </thead>
-                            <tbody id="matrimonios-body">
-                                <!-- Contenido dinámico -->
-                            </tbody>
-                        </table>
+                        <div class="table-container">
+                            <table id="matrimonios-table">
+                                <h2>CRUD del Sistema de Archivos de Matrimonios</h2>
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>CONSECUTIVO</th>
+                                        <th>EXPEDIENTE</th>
+                                        <th>ESPOSO</th>
+                                        <th>ESPOSA</th>
+                                        <th>TOMO</th>
+                                        <th>FOLIO</th>
+                                        <th>AÑO</th>
+                                        <!-- <th>OPERADOR</th>
+                                        <th>FECHA DE REGISTRO</th> -->
+                                        <th>ACCIONES</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="matrimonios-body">
+                                    <!-- Contenido dinámico -->
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="pagination">
@@ -149,7 +206,31 @@
 
         <script src="../../back/renderer.js"></script>
 
-        
+        <script>
+            tr.querySelector('.button-update').addEventListener('click', () => {
+    document.getElementById('modo').value = 'actualizar'; 
+    document.getElementById('h3-title-form').textContent = 'Actualizando Registro';
+    cargarDatosEnFormulario(row);
+
+    // Mostrar la sección del formulario
+    const formSection = document.getElementById('form-section');
+    const tableContainer = document.querySelector('.table-container');
+
+    formSection.classList.add('active'); // Agregar clase para mostrar
+    formSection.classList.remove('hidden'); // Asegurarse de que no esté oculta
+    tableContainer.classList.remove('full-width'); // Quitar clase para que ocupe el 50%
+});
+
+// Al cargar la página, asegúrate de que la tabla ocupe el 100% si el formulario está oculto
+document.addEventListener("DOMContentLoaded", () => {
+    const formSection = document.getElementById('form-section');
+    const tableContainer = document.querySelector('.table-container');
+
+    if (formSection.style.display === 'none') {
+        tableContainer.classList.add('full-width'); // Asegurarse de que la tabla ocupe el 100%
+    }
+});
+        </script>
     </body>
 </html>
 

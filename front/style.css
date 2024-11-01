@@ -173,6 +173,10 @@ input[type="date"]:focus {
     background-color: #2b3c7bcf;
 }
 
+button#btn-discard-update.btn{
+    width: 100%;
+}
+
 .container-bt{
     display: flex;
     justify-content: center;
@@ -234,7 +238,7 @@ button.btn-secondary:hover {
 /* Estilos para las etiquetas */
 .filters .filter {
     position: relative; /* Necesario para posicionar las etiquetas */
-    flex-basis: calc(33.333% - 10px); /* Tres elementos por fila, restando el espacio */
+    flex-basis: calc(25% - 10px); /* Cuatro elementos por fila, restando el espacio */
 }
 
 .filters label {
@@ -815,40 +819,32 @@ small {
     width: 100%; /* Ocupa el 100% del ancho por defecto */
 }
 
+.table-container.full-width {
+    width: 100%; /* La tabla ocupa el 100% del ancho cuando el formulario está oculto */
+}
+
+section#form-section.form-section {
+    display: none; /* Ocultar por defecto */
+    width: 70%; /* Ocupa el 50% del ancho cuando es visible */
+    background-color: #f9f9f9; /* Color de fondo suave */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 20px; /* Espaciado interno */
+    margin: auto; /* Centrar la tarjeta horizontalmente */
+    margin: 10px;
+    margin-right: 20px;
+}
+
 /* Cuando la sección de formulario es visible */
 .form-section.active {
     display: flex; /* Mostrar la sección */
     flex-direction: column;
-}
-
-section#form-section.form-section {
-    margin: 10px;
-
-    margin-right: 20px;
-
+    width: 70%; /* Ocupa el 50% del ancho cuando es visible */
 }
 
 /* Cuando la sección de formulario está oculta */
 .form-section.hidden {
     display: none; /* Mantener oculta */
-}
-
-.table-container.full-width {
-    width: 100%; /* La tabla ocupa el 100% del ancho cuando el formulario está oculto */
-    
-}
-
-
-
-.form-section {
-    display: none; /* Ocultar por defecto */
-    width: 50%; /* Ocupa el 50% del ancho cuando es visible */
-    background-color: #f9f9f9; /* Color de fondo suave */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    padding: 20px; /* Espaciado interno */
-    max-width: 400px; /* Ancho máximo de la tarjeta */
-    margin: auto; /* Centrar la tarjeta horizontalmente */
 }
 
 input .form-section{

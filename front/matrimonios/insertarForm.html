@@ -35,7 +35,7 @@
                 
                 <section class="section-data">
                     
-                    <h2>FILTRAR REGISTROS</h2>
+                    <h2>VER DATA Y FILTRAR REGISTROS</h2>
 
                     <div class="filters">
                         <div class="filter">
@@ -80,12 +80,12 @@
                                    onblur="this.placeholder='Año'">
                             <label for="filter-anio">Año</label>
                         </div>
-                        <!-- <div class="filter">
+                        <div class="filter">
                             <input type="text" id="filter-operador" placeholder="Operador" required 
                                    onfocus="this.placeholder=''" 
                                    onblur="this.placeholder='Operador'">
                             <label for="filter-operador">Operador</label>
-                        </div> -->
+                        </div>
 
                         <div class="filter" style="display:none;">
                             <input type="date" id="filter-fecha" required 
@@ -164,11 +164,10 @@
                                 <input type="hidden" id="modo" value="crear"> <!-- Este campo controla si es crear o actualizar -->
         
                                 <div class="flex-container">
-                                    <button type="reset" id="btn-reset-form" class="btn" style="display: none;">Limpiar</button>
+                                    <button type="reset" id="btn-reset-form" class="btn">Linpiar</button>
                                     <button type="submit" class="btn">Enviar</button>
                                 </div>
                             </form>
-                            <button class="btn" id="btn-discard-update">Descartar Actualizacion</button>
                         </section>
 
                         <div class="table-container">
@@ -176,15 +175,17 @@
                                 <h2>CRUD del Sistema de Archivos de Matrimonios</h2>
                                 <thead>
                                     <tr>
-                                        <th class="td-table-matrimonio">No.</th>
-                                        <th class="td-table-matrimonio">CONSECUTIVO</th>
-                                        <th class="td-table-matrimonio">EXPEDIENTE</th>
-                                        <th class="td-table-matrimonio" >ESPOSO</th>
-                                        <th class="td-table-matrimonio">ESPOSA</th>
-                                        <th class="td-table-matrimonio">TOMO</th>
-                                        <th class="td-table-matrimonio">FOLIO</th>
-                                        <th class="td-table-matrimonio">AÑO</th>
-                                        <th class="td-table-matrimonio">ACCIONES</th>
+                                        <th>No.</th>
+                                        <th>CONSECUTIVO</th>
+                                        <th>EXPEDIENTE</th>
+                                        <th>ESPOSO</th>
+                                        <th>ESPOSA</th>
+                                        <th>TOMO</th>
+                                        <th>FOLIO</th>
+                                        <th>AÑO</th>
+                                        <!-- <th>OPERADOR</th>
+                                        <th>FECHA DE REGISTRO</th> -->
+                                        <th>ACCIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody id="matrimonios-body">
@@ -202,44 +203,34 @@
                 </section>
             </main>
         </div>
-
+<!-- 
         <script src="../../back/renderer.js"></script>
 
         <script>
-             // Al cargar la página, asegúrate de que la tabla ocupe el 100% si el formulario está oculto
-             document.addEventListener("DOMContentLoaded", () => {
-                const formSection = document.getElementById('form-section');
-                const tableContainer = document.querySelector('.table-container');
-
-                if (formSection.style.display === 'none') {
-                    tableContainer.classList.add('full-width'); // Asegurarse de que la tabla ocupe el 100%
-                }
-            });
-
-            document.getElementById("btn-discard-update").addEventListener("click", () =>{
-                const formSection = document.getElementById('form-section');
-                const tableContainer = document.querySelector('.table-container');
-                formSection.style.display = 'none'
-                tableContainer.classList.add('full-width'); // Asegurarse de que la tabla ocupe el 100%
-                document.querySelectorAll('.td-table-matrimonio').style.fontSize = '12px'
-            })
-
             tr.querySelector('.button-update').addEventListener('click', () => {
-                document.getElementById('modo').value = 'actualizar'; 
-                document.getElementById('h3-title-form').textContent = 'Actualizando Registro';
-                cargarDatosEnFormulario(row);
+    document.getElementById('modo').value = 'actualizar'; 
+    document.getElementById('h3-title-form').textContent = 'Actualizando Registro';
+    cargarDatosEnFormulario(row);
 
-                // Mostrar la sección del formulario
-                const formSection = document.getElementById('form-section');
-                const tableContainer = document.querySelector('.table-container');
+    // Mostrar la sección del formulario
+    const formSection = document.getElementById('form-section');
+    const tableContainer = document.querySelector('.table-container');
 
-                formSection.classList.add('active'); // Agregar clase para mostrar
-                formSection.classList.remove('hidden'); // Asegurarse de que no esté oculta
-                tableContainer.classList.remove('full-width'); // Quitar clase para que ocupe el 50%
-                document.querySelectorAll('.td-table-matrimonio').style.fontSize = '5px'
-            });
+    formSection.classList.add('active'); // Agregar clase para mostrar
+    formSection.classList.remove('hidden'); // Asegurarse de que no esté oculta
+    tableContainer.classList.remove('full-width'); // Quitar clase para que ocupe el 50%
+});
 
-        </script>
+// Al cargar la página, asegúrate de que la tabla ocupe el 100% si el formulario está oculto
+document.addEventListener("DOMContentLoaded", () => {
+    const formSection = document.getElementById('form-section');
+    const tableContainer = document.querySelector('.table-container');
+
+    if (formSection.style.display === 'none') {
+        tableContainer.classList.add('full-width'); // Asegurarse de que la tabla ocupe el 100%
+    }
+});
+        </script> -->
     </body>
 </html>
 

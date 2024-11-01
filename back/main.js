@@ -76,7 +76,7 @@ function obtenerRegistros(page, filters = null) {
     let whereClause = [];
 
     if (filters) {
-        const filterKeys = ['expediente', 'caballero', 'dama', 'operador', 'fecha'];
+        const filterKeys = ['expediente', 'caballero', 'dama', 'fecha'];
         const filterKeysNum = ['consecutivo', 'tomo', 'folio', 'anio'];
 
         filterKeys.forEach(key => {
@@ -145,14 +145,11 @@ console.log(fechaFormateada.toString()); // Muestra la fecha en formato dd/mm/yy
 
 ipcMain.on('crear-registro', (event, data) => {
     console.log('Evento crear-registro recibido:', data); // Para depuración
-    //! const { consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha } = data;
     const {expediente, caballero, dama, tomo, folio, anio} = data;
-    //! const params = [consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha];
     const params = [expediente, caballero, dama, tomo, folio, anio];
     //TODO: Validar formulario. (consecutivo int, expediente int, caballero string, dama string, fecha data, operador session.operador == username)
     // if (consecutivo && expediente && caballero && dama && tomo && folio && anio && operador && fecha) {
     if (expediente && caballero && dama && tomo && folio && anio) {
-        //! const query = `INSERT INTO matrimonios (consecutivo, expediente, caballero, dama, tomo, folio, anio, operador, fecha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
         const query = `INSERT INTO matrimonios  (expediente, caballero, dama, tomo, folio, anio, operador, fecha) 
                         VALUES (?, ?, ?, ?, ?, ?, 'armijo', ${fechaFormateada.toString()})`;
         db.execute(query, params, (err, result, fields) => {
@@ -171,7 +168,6 @@ ipcMain.on('crear-registro', (event, data) => {
         event.reply('registro-creado', { success: false, error: "Datos incompletos" });
     }
 });
-
 
 
 
@@ -211,12 +207,6 @@ ipcMain.on('actualizar-registro', (event, data) => {
         event.reply('registro-actualizado', { success: false, error: "Datos incompletos" });
     }
 });
-
-
-
-
-
-
 
 
 

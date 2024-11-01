@@ -53,17 +53,17 @@ function actualizarTabla(rows, offset) {
         rows.forEach((row, index) => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${index + 1 + offset}</td>
-                <td>${row.consecutivo}</td>
-                <td>${row.expediente}</td>
-                <td>${row.caballero}</td>
-                <td>${row.dama}</td>
-                <td>${row.tomo}</td>
-                <td>${row.folio}</td>
-                <td>${row.anio}</td>
+                <td class='td-table-matrimonio'>${index + 1 + offset}</td>
+                <td class='td-table-matrimonio'>${row.consecutivo}</td>
+                <td class='td-table-matrimonio'>${row.expediente}</td>
+                <td class='td-table-matrimonio'>${row.caballero}</td>
+                <td class='td-table-matrimonio'>${row.dama}</td>
+                <td class='td-table-matrimonio'>${row.tomo}</td>
+                <td class='td-table-matrimonio' >${row.folio}</td>
+                <td class='td-table-matrimonio'>${row.anio}</td>
                  <td>
-                    <button class='button-update btn-action' data-id='${row.consecutivo}'>Actualizar</button> 
-                    <button class='button-delete btn-action' data-id='${row.consecutivo}'>Eliminar</button>
+                    <button class='button-update btn-action td-table-matrimonio' data-id='${row.consecutivo}'>Actualizar</button> 
+                    <button class='button-delete btn-action td-table-matrimonio' data-id='${row.consecutivo}'>Eliminar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -158,7 +158,7 @@ function aplicarFiltros() {
         expediente: document.getElementById('filter-expediente').value,
         folio: document.getElementById('filter-folio').value,
         anio: document.getElementById('filter-anio').value,
-        operador: document.getElementById('filter-operador').value,
+        // operador: document.getElementById('filter-operador').value,
         fecha: document.getElementById('filter-fecha').value,
     };
 
@@ -237,8 +237,11 @@ function enviarFormulario(event) {
 
     }
 
-
-
+    const formSection = document.getElementById('form-section');
+    const tableContainer = document.querySelector('.table-container');
+    formSection.style.display = 'none'
+    tableContainer.classList.add('full-width'); // Asegurarse de que la tabla ocupe el 100%
+    document.querySelectorAll('.td-table-matrimonio').style.fontSize = '12px'
 }
 
 // Función para formatear la fecha a dd/mm/yyyy
@@ -392,7 +395,7 @@ function limpiaFiltro() {
     document.getElementById('filter-expediente').value = '';
     document.getElementById('filter-folio').value = '';
     document.getElementById('filter-anio').value = '';
-    document.getElementById('filter-operador').value = '';
+    // document.getElementById('filter-operador').value = '';
     document.getElementById('filter-fecha').value = '';
 
     // Limpiar los filtros y mostrar todos los datos
